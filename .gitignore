@@ -1,0 +1,16 @@
+backend/api/private/firebase_connect.json
+backend/api/private/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Django
+*.sqlite3
+.env
+
+# Flutter/Dart
+frontend/lib/firebase/google-services.json
+
+backend/api/firebase.py
