@@ -230,6 +230,75 @@ class AboutUsPage extends StatelessWidget {
                   ),
                 ],
               ),
+              Container(
+                height: 595,
+                padding: EdgeInsets.all(48),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Adress", style: TextStyle(fontSize: 32)),
+                          SizedBox(height: 16),
+                          Text("Lorem Ipsum dolor sit amet"),
+                          SizedBox(height: 10),
+                          Text("Lorem Ipsum dolor sit amet"),
+                          SizedBox(height: 10),
+                          Text("Lorem Ipsum dolor sit amet"),
+                          SizedBox(height: 30),
+                          Container(
+                            height: 61,
+                            width: 61,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage('testimg1.jpg'),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 30),
+                          Container(
+                            height: 61,
+                            width: 61,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage('testimg1.jpg'),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 30),
+                          Container(
+                            height: 61,
+                            width: 61,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage('testimg1.jpg'),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 30),
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 16),
+                    Expanded(
+                      child: Container(
+                        height: 485,
+                        width: 671,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('testimg1.jpg'),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
