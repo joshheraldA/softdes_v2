@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/view/LoginPage.dart';
+import 'package:frontend/viewmodel/LoginPageViewModel.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => LoginPageViewModel(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

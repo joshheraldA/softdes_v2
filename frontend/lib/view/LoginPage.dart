@@ -1,10 +1,14 @@
 import 'dart:ui';
 
-import 'package:flutter/material.dart';
+import 'package:frontend/viewmodel/LoginPageViewModel.dart';
 import 'package:frontend/widgets/RoundedButton.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import 'package:flutter/material.dart';
 import 'package:frontend/widgets/RoundedTextField.dart';
 import 'package:frontend/widgets/actionCard.dart';
 
+import 'package:provider/provider.dart';
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -13,8 +17,25 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+  final usernameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  final double textFieldWidth = 0.27;
+
+  @override
+  void dispose() {
+    usernameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final viewModel = context.watch<LoginPageViewModel>();
+
     return Scaffold(
       body: Center(
         child: Stack(
@@ -48,13 +69,66 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
 
-            Center(
+            Positioned(
+              left: MediaQuery.of(context).size.width * 0.12,
+              top: MediaQuery.of(context).size.height * 0.1,
               child: ActionCard(
-                width: MediaQuery.of(context).size.width * 0.25,
-                height: MediaQuery.of(context).size.height * 0.60,
+                width: MediaQuery.of(context).size.width * 0.34,
+                height: MediaQuery.of(context).size.height * 0.75,
                 bgColor: const Color.fromARGB(255, 255, 255, 255),
-                content: Text("WASSUP"),
-                borderRadiusVal: 20,
+                content: Padding(
+                  padding: const EdgeInsets.only(top: 105),
+                  child: Column(
+                    children: [
+                      RoundedTextField(
+                        hintText: "username", 
+                        labelText: "Username", 
+                        height: MediaQuery.of(context).size.height * 0.1, 
+                        width: MediaQuery.of(context).size.width * textFieldWidth,
+                        textController: usernameController,
+                      ),
+
+                      RoundedTextField(
+                        hintText: "email", 
+                        labelText: "Email", 
+                        height: MediaQuery.of(context).size.height * 0.1, 
+                        width: MediaQuery.of(context).size.width * textFieldWidth,
+                        textController: emailController,
+                      ),
+
+                      RoundedTextField(
+                        hintText: "password", 
+                        labelText: "Password", 
+                        height: MediaQuery.of(context).size.height * 0.1, 
+                        width: MediaQuery.of(context).size.width * textFieldWidth,
+                        textController: passwordController,
+                      ),
+
+                      Text(
+                        viewModel.text,
+                        style: TextStyle(
+                          fontFamily: GoogleFonts.inter().fontFamily,
+                          color: Colors.red,
+                          letterSpacing: 1
+                        ),
+                      ),
+
+                      Divider(
+                        indent: 60,
+                        endIndent: 60,
+                        thickness: 2,
+                        color: const Color.fromARGB(255, 192, 192, 192),
+                      ),
+
+                      RoundedButton(
+                        onPressed: () => { 
+                          viewModel.updateText("${usernameController.text} is your username")
+                        }, 
+                        child: Text("Submit")
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ],

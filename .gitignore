@@ -1,5 +1,4 @@
 backend/api/private/firebase_connect.json
-backend/api/private/
 
 # Python cache
 __pycache__/
