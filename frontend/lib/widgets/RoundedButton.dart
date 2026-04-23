@@ -26,9 +26,7 @@ class RoundedButton extends StatelessWidget {
         minimumSize: Size(length, width),
         foregroundColor: colors,
         backgroundColor: backGroundColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12)
-        )
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
       child: child,
     );
