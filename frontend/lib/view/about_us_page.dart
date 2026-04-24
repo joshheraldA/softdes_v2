@@ -10,13 +10,14 @@ class AboutUsPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Container(
           width: 1536,
-          padding: EdgeInsets.all(100),
+
+          // padding: EdgeInsets.only(left: 80, right: 80),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               // ── Hero Banner ──────────────────────────────────────────
               Container(
-                height: 595,
+                height: 300,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage("testimg1.jpg"),
@@ -36,7 +37,7 @@ class AboutUsPage extends StatelessWidget {
                         children: [
                           Text(
                             "Lorem Ipsum Dolor Sit Amet",
-                            style: TextStyle(color: Colors.white, fontSize: 32),
+                            style: TextStyle(color: Colors.white, fontSize: 60),
                           ),
                           SizedBox(height: 16),
                           Text("Lorem Ipsum Dolor Sit Amet"),
@@ -50,13 +51,17 @@ class AboutUsPage extends StatelessWidget {
               // ── Our Vision ───────────────────────────────────────────
               Container(
                 height: 595,
-                padding: EdgeInsets.all(48),
+                padding: EdgeInsets.only(
+                  left: 50,
+                  right: 80,
+                  top: 50,
+                  bottom: 50,
+                ),
+                color: Color(0xFFEBEBEB),
                 child: Row(
                   children: [
                     Expanded(
                       child: Container(
-                        height: 485,
-                        width: 671,
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage('testimg1.jpg'),
@@ -65,13 +70,19 @@ class AboutUsPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(width: 38),
+                    SizedBox(width: 50),
                     Expanded(
                       child: Column(
                         children: [
-                          Text("Our Vision", style: TextStyle(fontSize: 32)),
+                          Text("Our Vision", style: TextStyle(fontSize: 60)),
                           SizedBox(height: 16),
-                          Text("Lorem Ipsum dolor sit amet"),
+                          Divider(color: Color(0xFFd3d3d3)),
+                          SizedBox(height: 16),
+                          Text(
+                            "Lorem Ipsum dolor sit amet Lorem Ipsum dolor sit amet Lorem Ipsum dolor sit amet Lorem Ipsum dolor sit amet Lorem Ipsum dolor sit amet Lorem Ipsum dolor sit amet",
+                            style: TextStyle(fontSize: 30),
+                            textAlign: TextAlign.justify,
+                          ),
                         ],
                       ),
                     ),
@@ -82,24 +93,34 @@ class AboutUsPage extends StatelessWidget {
               // ── Our Mission ──────────────────────────────────────────
               Container(
                 height: 595,
-                color: Colors.green,
-                padding: EdgeInsets.all(48),
+                color: Color(0xFFf3f3f3),
+
+                padding: EdgeInsets.only(
+                  top: 50,
+                  bottom: 50,
+                  left: 80,
+                  right: 50,
+                ),
                 child: Row(
                   children: [
                     Expanded(
                       child: Column(
                         children: [
-                          Text("Our Mission", style: TextStyle(fontSize: 32)),
+                          Text("Our Mission", style: TextStyle(fontSize: 60)),
                           SizedBox(height: 16),
-                          Text("Lorem Ipsum dolor sit amet"),
+                          Divider(color: Color(0xFFd3d3d3)),
+                          SizedBox(height: 16),
+                          Text(
+                            "Lorem Ipsum dolor sit amet Lorem Ipsum dolor sit amet Lorem Ipsum dolor sit amet Lorem Ipsum dolor sit amet Lorem Ipsum dolor sit amet Lorem Ipsum dolor sit amet",
+                            style: TextStyle(fontSize: 30),
+                            textAlign: TextAlign.justify,
+                          ),
                         ],
                       ),
                     ),
-                    SizedBox(width: 16),
+                    SizedBox(width: 50),
                     Expanded(
                       child: Container(
-                        height: 485,
-                        width: 671,
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage('testimg1.jpg'),
@@ -111,11 +132,10 @@ class AboutUsPage extends StatelessWidget {
                   ],
                 ),
               ),
-
               // ── Team / Feature Cards ─────────────────────────────────
               Container(
                 height: 595,
-                padding: EdgeInsets.all(48),
+                padding: EdgeInsets.all(50),
                 child: Row(
                   children: [
                     Expanded(
@@ -123,8 +143,8 @@ class AboutUsPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
-                            height: 200,
-                            width: 200,
+                            height: 150,
+                            width: 150,
                             decoration: BoxDecoration(
                               image: DecorationImage(
                                 image: AssetImage('testimg1.jpg'),
@@ -132,18 +152,26 @@ class AboutUsPage extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 16),
-                          Text("Lorem Ipsum Dolor Sit Amet"),
+                          Container(
+                            height: 150,
+                            width: 300,
+                            child: Text(
+                              "Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet",
+                              style: TextStyle(fontSize: 18),
+                              textAlign: TextAlign.justify,
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                    SizedBox(width: 100),
+
                     Expanded(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
-                            height: 200,
-                            width: 200,
+                            height: 150,
+                            width: 150,
                             decoration: BoxDecoration(
                               image: DecorationImage(
                                 image: AssetImage('testimg1.jpg'),
@@ -151,18 +179,25 @@ class AboutUsPage extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 16),
-                          Text("Lorem Ipsum Dolor Sit Amet"),
+                          Container(
+                            height: 150,
+                            width: 300,
+                            child: Text(
+                              "Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet",
+                              style: TextStyle(fontSize: 18),
+                              textAlign: TextAlign.justify,
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                    SizedBox(width: 100),
                     Expanded(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
-                            height: 200,
-                            width: 200,
+                            height: 150,
+                            width: 150,
                             decoration: BoxDecoration(
                               image: DecorationImage(
                                 image: AssetImage('testimg1.jpg'),
@@ -170,7 +205,15 @@ class AboutUsPage extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 16),
-                          Text("Lorem Ipsum Dolor Sit Amet"),
+                          Container(
+                            height: 150,
+                            width: 300,
+                            child: Text(
+                              "Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet",
+                              style: TextStyle(fontSize: 18),
+                              textAlign: TextAlign.justify,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -181,13 +224,28 @@ class AboutUsPage extends StatelessWidget {
               // ── About Us Blurb ───────────────────────────────────────
               Container(
                 height: 595,
-                color: Colors.green,
+                color: Color(0xFFEBEBEB),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text("ABOUT US", style: TextStyle(fontSize: 45)),
-                    SizedBox(height: 20),
-                    Text("Lorem Ipsum Dolor Sit Amet"),
+                    Container(
+                      width: 950,
+                      padding: EdgeInsets.only(top: 50),
+                      child: Text(
+                        "ABOUT US",
+                        style: TextStyle(fontSize: 60),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    SizedBox(height: 30),
+                    Container(
+                      width: 750,
+                      child: Text(
+                        "Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet",
+                        style: TextStyle(fontSize: 20),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -198,13 +256,22 @@ class AboutUsPage extends StatelessWidget {
                   Expanded(
                     child: Container(
                       height: 595,
-                      color: Colors.red,
+                      color: Color(0xFFe2e0e1),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Login text", style: TextStyle(fontSize: 35)),
-                          SizedBox(height: 16),
-                          RoundedButton(onPressed: () {}, child: Text("Login")),
+                          Text(
+                            "Already have an account?",
+                            style: TextStyle(fontSize: 40),
+                          ),
+                          SizedBox(height: 40),
+                          RoundedButton(
+                            length: 210,
+                            width: 50,
+                            backGroundColor: Color(0xFFe8c89a),
+                            onPressed: () {},
+                            child: Text("Login"),
+                          ),
                         ],
                       ),
                     ),
@@ -212,15 +279,26 @@ class AboutUsPage extends StatelessWidget {
                   Expanded(
                     child: Container(
                       height: 595,
-                      color: Colors.blue,
+                      color: Color(0xFFf5f5f5),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Register text", style: TextStyle(fontSize: 35)),
+                          Text(
+                            "let's get you started!",
+                            style: TextStyle(fontSize: 35),
+                            textAlign: TextAlign.center,
+                          ),
                           SizedBox(height: 16),
+                          Text(
+                            "Create an account with your USC email.",
+                            style: TextStyle(fontSize: 25),
+                            textAlign: TextAlign.center,
+                          ),
+                          SizedBox(height: 50),
                           RoundedButton(
-                            length: 100,
-                            width: 100,
+                            length: 210,
+                            width: 50,
+                            backGroundColor: Color(0xFFe8c89a),
                             onPressed: () {},
                             child: Text("Register"),
                           ),
@@ -239,44 +317,69 @@ class AboutUsPage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Adress", style: TextStyle(fontSize: 32)),
+                          Text(
+                            "Josh's Doctor Playhouse",
+                            style: TextStyle(fontSize: 45),
+                          ),
                           SizedBox(height: 16),
-                          Text("Lorem Ipsum dolor sit amet"),
-                          SizedBox(height: 10),
-                          Text("Lorem Ipsum dolor sit amet"),
-                          SizedBox(height: 10),
-                          Text("Lorem Ipsum dolor sit amet"),
-                          SizedBox(height: 30),
+                          Text(
+                            "Email: ouremail@email.com",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          SizedBox(height: 15),
+                          Text(
+                            "#: 0991 991 9911",
+                            style: TextStyle(fontSize: 25),
+                          ),
+                          SizedBox(height: 35),
                           Container(
                             height: 61,
                             width: 61,
+
                             decoration: BoxDecoration(
                               image: DecorationImage(
                                 image: AssetImage('testimg1.jpg'),
                                 fit: BoxFit.cover,
                               ),
                             ),
-                          ),
-                          SizedBox(height: 30),
-                          Container(
-                            height: 61,
-                            width: 61,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage('testimg1.jpg'),
-                                fit: BoxFit.cover,
-                              ),
+                            child: RoundedButton(
+                              onPressed: () {},
+                              backGroundColor: Colors.white.withAlpha(0),
+                              child: Text(""),
                             ),
                           ),
                           SizedBox(height: 30),
                           Container(
                             height: 61,
                             width: 61,
+
                             decoration: BoxDecoration(
                               image: DecorationImage(
                                 image: AssetImage('testimg1.jpg'),
                                 fit: BoxFit.cover,
                               ),
+                            ),
+                            child: RoundedButton(
+                              onPressed: () {},
+                              backGroundColor: Colors.white.withAlpha(0),
+                              child: Text(""),
+                            ),
+                          ),
+                          SizedBox(height: 30),
+                          Container(
+                            height: 61,
+                            width: 61,
+
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage('testimg1.jpg'),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            child: RoundedButton(
+                              onPressed: () {},
+                              backGroundColor: Colors.white.withAlpha(0),
+                              child: Text(""),
                             ),
                           ),
                           SizedBox(height: 30),
