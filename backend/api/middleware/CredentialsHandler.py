@@ -134,7 +134,7 @@ class CheckProfanityHandler(AbstractCredentialsHandler):
             str: An error message if validation fails, otherwise the result
                  from the next handler in the chain.
         """
-        if any(word in request for word in word_list):
+        if any(word in request.lower() for word in word_list):
             return "Email/username cannot contain profanity"
         else:
             return super().handle(request)

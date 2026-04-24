@@ -46,7 +46,7 @@ class UserApi:
             except Exception as e:
                 return Response({
                     "status": False,
-                    "message": e
+                    "message": str(e)
                     },
                     status=status.HTTP_400_BAD_REQUEST)
             
@@ -61,7 +61,7 @@ class UserApi:
         else:
             return Response({
                 "status": False,
-                "error": result},
+                "message": result},
                 status=status.HTTP_400_BAD_REQUEST)
 
 

@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:frontend/viewmodel/LoginPageViewModel.dart';
+import 'package:frontend/viewmodel/RegistrationViewModel.dart';
 import 'package:frontend/widgets/RoundedButton.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -9,6 +9,7 @@ import 'package:frontend/widgets/RoundedTextField.dart';
 import 'package:frontend/widgets/actionCard.dart';
 
 import 'package:provider/provider.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -17,7 +18,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   final usernameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -34,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = context.watch<LoginPageViewModel>();
+    final viewModel = context.watch<RegistrationViewModel>();
 
     return Scaffold(
       body: Center(
@@ -81,26 +81,29 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     children: [
                       RoundedTextField(
-                        hintText: "username", 
-                        labelText: "Username", 
-                        height: MediaQuery.of(context).size.height * 0.1, 
-                        width: MediaQuery.of(context).size.width * textFieldWidth,
+                        hintText: "username",
+                        labelText: "Username",
+                        height: MediaQuery.of(context).size.height * 0.1,
+                        width:
+                            MediaQuery.of(context).size.width * textFieldWidth,
                         textController: usernameController,
                       ),
 
                       RoundedTextField(
-                        hintText: "email", 
-                        labelText: "Email", 
-                        height: MediaQuery.of(context).size.height * 0.1, 
-                        width: MediaQuery.of(context).size.width * textFieldWidth,
+                        hintText: "email",
+                        labelText: "Email",
+                        height: MediaQuery.of(context).size.height * 0.1,
+                        width:
+                            MediaQuery.of(context).size.width * textFieldWidth,
                         textController: emailController,
                       ),
 
                       RoundedTextField(
-                        hintText: "password", 
-                        labelText: "Password", 
-                        height: MediaQuery.of(context).size.height * 0.1, 
-                        width: MediaQuery.of(context).size.width * textFieldWidth,
+                        hintText: "password",
+                        labelText: "Password",
+                        height: MediaQuery.of(context).size.height * 0.1,
+                        width:
+                            MediaQuery.of(context).size.width * textFieldWidth,
                         textController: passwordController,
                       ),
 
@@ -109,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                         style: TextStyle(
                           fontFamily: GoogleFonts.inter().fontFamily,
                           color: Colors.red,
-                          letterSpacing: 1
+                          letterSpacing: 1,
                         ),
                       ),
 
@@ -121,10 +124,14 @@ class _LoginPageState extends State<LoginPage> {
                       ),
 
                       RoundedButton(
-                        onPressed: () => { 
-                          viewModel.updateText("${usernameController.text} is your username")
-                        }, 
-                        child: Text("Submit")
+                        onPressed: () => {
+                          viewModel.updateText(
+                            usernameController.text,
+                            emailController.text,
+                            passwordController.text,
+                          ),
+                        },
+                        child: Text("Submit"),
                       ),
                     ],
                   ),
