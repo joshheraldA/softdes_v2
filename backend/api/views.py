@@ -1,5 +1,5 @@
 from firebase_admin import firestore
-from api.firebase import db
+# from api.firebase import db
 
 from django.http import JsonResponse
 

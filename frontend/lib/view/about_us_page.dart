@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/widgets/RoundedButton.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AboutUsPage extends StatelessWidget {
   const AboutUsPage({super.key});
@@ -20,7 +21,7 @@ class AboutUsPage extends StatelessWidget {
                 height: 300,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage("testimg1.jpg"),
+                    image: AssetImage("mottoSection.jpg"),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -36,11 +37,22 @@ class AboutUsPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Lorem Ipsum Dolor Sit Amet",
-                            style: TextStyle(color: Colors.white, fontSize: 60),
+                            "Love in action is service to the world",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 60,
+                              fontFamily: GoogleFonts.roboto().fontFamily,
+                            ),
                           ),
                           SizedBox(height: 16),
-                          Text("Lorem Ipsum Dolor Sit Amet"),
+                          Text(
+                            "- Mother Teresa",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontFamily: GoogleFonts.roboto().fontFamily,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -64,7 +76,7 @@ class AboutUsPage extends StatelessWidget {
                       child: Container(
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage('testimg1.jpg'),
+                            image: AssetImage('ourVision.jpg'),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -73,15 +85,25 @@ class AboutUsPage extends StatelessWidget {
                     SizedBox(width: 50),
                     Expanded(
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Our Vision", style: TextStyle(fontSize: 60)),
+                          Text(
+                            "Our Vision",
+                            style: TextStyle(
+                              fontSize: 65,
+                              fontFamily: GoogleFonts.roboto().fontFamily,
+                            ),
+                          ),
                           SizedBox(height: 16),
                           Divider(color: Color(0xFFd3d3d3)),
                           SizedBox(height: 16),
                           Text(
-                            "Lorem Ipsum dolor sit amet Lorem Ipsum dolor sit amet Lorem Ipsum dolor sit amet Lorem Ipsum dolor sit amet Lorem Ipsum dolor sit amet Lorem Ipsum dolor sit amet",
-                            style: TextStyle(fontSize: 30),
-                            textAlign: TextAlign.justify,
+                            "To be the key player in promoting the spirit of active volunteerism through digital convenience",
+                            style: TextStyle(
+                              fontSize: 35,
+                              fontFamily: GoogleFonts.roboto().fontFamily,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
                         ],
                       ),
@@ -105,15 +127,25 @@ class AboutUsPage extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Our Mission", style: TextStyle(fontSize: 60)),
+                          Text(
+                            "Our Mission",
+                            style: TextStyle(
+                              fontSize: 65,
+                              fontFamily: GoogleFonts.roboto().fontFamily,
+                            ),
+                          ),
                           SizedBox(height: 16),
                           Divider(color: Color(0xFFd3d3d3)),
                           SizedBox(height: 16),
                           Text(
-                            "Lorem Ipsum dolor sit amet Lorem Ipsum dolor sit amet Lorem Ipsum dolor sit amet Lorem Ipsum dolor sit amet Lorem Ipsum dolor sit amet Lorem Ipsum dolor sit amet",
-                            style: TextStyle(fontSize: 30),
-                            textAlign: TextAlign.justify,
+                            "To provide our users with the information they need to better actively participate in acts of service to others",
+                            style: TextStyle(
+                              fontSize: 35,
+                              fontFamily: GoogleFonts.roboto().fontFamily,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
                         ],
                       ),
@@ -123,7 +155,7 @@ class AboutUsPage extends StatelessWidget {
                       child: Container(
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage('testimg1.jpg'),
+                            image: AssetImage('ourMission.jpg'),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -147,7 +179,7 @@ class AboutUsPage extends StatelessWidget {
                             width: 150,
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: AssetImage('testimg1.jpg'),
+                                image: AssetImage('featureIcon1.png'),
                               ),
                             ),
                           ),
@@ -156,9 +188,9 @@ class AboutUsPage extends StatelessWidget {
                             height: 150,
                             width: 300,
                             child: Text(
-                              "Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet",
+                              "Keep track of your acquired CES points and see how much you need to graduate",
                               style: TextStyle(fontSize: 18),
-                              textAlign: TextAlign.justify,
+                              textAlign: TextAlign.center,
                             ),
                           ),
                         ],
@@ -174,7 +206,7 @@ class AboutUsPage extends StatelessWidget {
                             width: 150,
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: AssetImage('testimg1.jpg'),
+                                image: AssetImage('featureIcon2.png'),
                               ),
                             ),
                           ),
@@ -183,9 +215,9 @@ class AboutUsPage extends StatelessWidget {
                             height: 150,
                             width: 300,
                             child: Text(
-                              "Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet",
+                              "Stay connected and aware of any ongoing and upcoming CES activities by browsing the events list",
                               style: TextStyle(fontSize: 18),
-                              textAlign: TextAlign.justify,
+                              textAlign: TextAlign.center,
                             ),
                           ),
                         ],
@@ -200,7 +232,7 @@ class AboutUsPage extends StatelessWidget {
                             width: 150,
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: AssetImage('testimg1.jpg'),
+                                image: AssetImage('featureIcon3.png'),
                               ),
                             ),
                           ),
@@ -209,9 +241,9 @@ class AboutUsPage extends StatelessWidget {
                             height: 150,
                             width: 300,
                             child: Text(
-                              "Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet",
+                              "Allow the calendar to show you when a CES activity requires your participation and stay notified",
                               style: TextStyle(fontSize: 18),
-                              textAlign: TextAlign.justify,
+                              textAlign: TextAlign.center,
                             ),
                           ),
                         ],
@@ -226,14 +258,18 @@ class AboutUsPage extends StatelessWidget {
                 height: 595,
                 color: Color(0xFFEBEBEB),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
                       width: 950,
                       padding: EdgeInsets.only(top: 50),
                       child: Text(
                         "ABOUT US",
-                        style: TextStyle(fontSize: 60),
+                        style: TextStyle(
+                          fontSize: 60,
+                          fontFamily: GoogleFonts.roboto().fontFamily,
+                        ),
+
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -241,8 +277,11 @@ class AboutUsPage extends StatelessWidget {
                     Container(
                       width: 750,
                       child: Text(
-                        "Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet Lorem Ipsum Dolor Sit Amet",
-                        style: TextStyle(fontSize: 20),
+                        "Josh's Doctor Playhouse is a software development company that strives to design clear, secure, and scaleable solutions through enhanced communication. We take pride in our ability to connect with our clients in order to wholly understand their problems and what solutions they need. ",
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontFamily: GoogleFonts.roboto().fontFamily,
+                        ),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -262,7 +301,10 @@ class AboutUsPage extends StatelessWidget {
                         children: [
                           Text(
                             "Already have an account?",
-                            style: TextStyle(fontSize: 40),
+                            style: TextStyle(
+                              fontSize: 40,
+                              fontFamily: GoogleFonts.roboto().fontFamily,
+                            ),
                           ),
                           SizedBox(height: 40),
                           RoundedButton(
@@ -285,13 +327,19 @@ class AboutUsPage extends StatelessWidget {
                         children: [
                           Text(
                             "let's get you started!",
-                            style: TextStyle(fontSize: 35),
+                            style: TextStyle(
+                              fontSize: 35,
+                              fontFamily: GoogleFonts.roboto().fontFamily,
+                            ),
                             textAlign: TextAlign.center,
                           ),
                           SizedBox(height: 16),
                           Text(
                             "Create an account with your USC email.",
-                            style: TextStyle(fontSize: 25),
+                            style: TextStyle(
+                              fontSize: 25,
+                              fontFamily: GoogleFonts.roboto().fontFamily,
+                            ),
                             textAlign: TextAlign.center,
                           ),
                           SizedBox(height: 50),
@@ -319,17 +367,26 @@ class AboutUsPage extends StatelessWidget {
                         children: [
                           Text(
                             "Josh's Doctor Playhouse",
-                            style: TextStyle(fontSize: 45),
+                            style: TextStyle(
+                              fontSize: 45,
+                              fontFamily: GoogleFonts.roboto().fontFamily,
+                            ),
                           ),
                           SizedBox(height: 16),
                           Text(
                             "Email: ouremail@email.com",
-                            style: TextStyle(fontSize: 20),
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontFamily: GoogleFonts.roboto().fontFamily,
+                            ),
                           ),
                           SizedBox(height: 15),
                           Text(
                             "#: 0991 991 9911",
-                            style: TextStyle(fontSize: 25),
+                            style: TextStyle(
+                              fontSize: 25,
+                              fontFamily: GoogleFonts.roboto().fontFamily,
+                            ),
                           ),
                           SizedBox(height: 35),
                           Container(
@@ -338,7 +395,7 @@ class AboutUsPage extends StatelessWidget {
 
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: AssetImage('testimg1.jpg'),
+                                image: AssetImage('facebookIcon.png'),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -355,7 +412,7 @@ class AboutUsPage extends StatelessWidget {
 
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: AssetImage('testimg1.jpg'),
+                                image: AssetImage('instagramIcon.png'),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -372,7 +429,7 @@ class AboutUsPage extends StatelessWidget {
 
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: AssetImage('testimg1.jpg'),
+                                image: AssetImage('xIcon.png'),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -393,7 +450,7 @@ class AboutUsPage extends StatelessWidget {
                         width: 671,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage('testimg1.jpg'),
+                            image: AssetImage('location.png'),
                             fit: BoxFit.cover,
                           ),
                         ),
