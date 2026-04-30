@@ -10,14 +10,14 @@ import 'package:frontend/widgets/actionCard.dart';
 
 import 'package:provider/provider.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegistrationPage extends StatefulWidget {
+  const RegistrationPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegistrationPage> createState() => _RegistrationPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegistrationPageState extends State<RegistrationPage> {
   final usernameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -77,16 +77,30 @@ class _LoginPageState extends State<LoginPage> {
                 height: MediaQuery.of(context).size.height * 0.75,
                 bgColor: const Color.fromARGB(255, 255, 255, 255),
                 content: Padding(
-                  padding: const EdgeInsets.only(top: 105),
+                  padding: const EdgeInsets.only(top: 60),
                   child: Column(
                     children: [
-                      RoundedTextField(
-                        hintText: "username",
-                        labelText: "Username",
-                        height: MediaQuery.of(context).size.height * 0.1,
-                        width:
-                            MediaQuery.of(context).size.width * textFieldWidth,
-                        textController: usernameController,
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.2,
+                        height: MediaQuery.of(context).size.height * 0.11,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage("assets/logo.png"),
+                          ),
+                        ),
+                      ),
+
+                      Padding(
+                        padding: const EdgeInsets.only(top: 30.0),
+                        child: RoundedTextField(
+                          hintText: "username",
+                          labelText: "Username",
+                          height: MediaQuery.of(context).size.height * 0.1,
+                          width:
+                              MediaQuery.of(context).size.width *
+                              textFieldWidth,
+                          textController: usernameController,
+                        ),
                       ),
 
                       RoundedTextField(
@@ -107,14 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                         textController: passwordController,
                       ),
 
-                      Text(
-                        viewModel.text,
-                        style: TextStyle(
-                          fontFamily: GoogleFonts.inter().fontFamily,
-                          color: Colors.red,
-                          letterSpacing: 1,
-                        ),
-                      ),
+                      Text(viewModel.text, style: TextStyle(color: Colors.red)),
 
                       Divider(
                         indent: 60,
@@ -123,15 +130,65 @@ class _LoginPageState extends State<LoginPage> {
                         color: const Color.fromARGB(255, 192, 192, 192),
                       ),
 
-                      RoundedButton(
-                        onPressed: () => {
-                          viewModel.updateText(
-                            usernameController.text,
-                            emailController.text,
-                            passwordController.text,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 60.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment
+                              .spaceBetween, // Pushes items to opposite ends
+                          children: [
+                            TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                "Create Account",
+                                style: TextStyle(
+                                  color: const Color.fromARGB(
+                                    255,
+                                    197,
+                                    197,
+                                    197,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                "Forgot Password",
+                                style: TextStyle(
+                                  color: const Color.fromARGB(
+                                    255,
+                                    197,
+                                    197,
+                                    197,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20),
+                        child: RoundedButton(
+                          onPressed: () => {
+                            viewModel.updateText(
+                              usernameController.text,
+                              emailController.text,
+                              passwordController.text,
+                            ),
+                          },
+                          width: MediaQuery.of(context).size.width * 0.25,
+                          height: MediaQuery.of(context).size.height * 0.06,
+                          backGroundColor: const Color.fromARGB(
+                            255,
+                            104,
+                            206,
+                            136,
                           ),
-                        },
-                        child: Text("Submit"),
+                          colors: Colors.white,
+                          child: Text("Submit"),
+                        ),
                       ),
                     ],
                   ),
