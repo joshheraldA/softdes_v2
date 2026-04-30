@@ -14,7 +14,9 @@ from rest_framework import status
 from rest_framework.response import Response
 from api.middleware.CredentialsHandler import CheckProfanityHandler, CheckSchoolEmailHandler, CheckIllegalCharactersHandler
 from firebase_admin import auth, firestore
+import requests
 
+db = firestore.client()
 
 class UserApi:
 
@@ -63,7 +65,46 @@ class UserApi:
                 "status": False,
                 "message": result},
                 status=status.HTTP_400_BAD_REQUEST)
+        
+    @staticmethod
+    @api_view(['POST'])
+    def login_user(request):
+        data = request.data
 
+        try: 
+            response = requests.post(
+            f"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBBVORwC933IYYmIOL7Sa56xISlhN4Pr90",
+            json={
+                "email": data["email"],
+                "password": data["password"],
+                "returnSecureToken": True
+                }
+            )
+            result = response.json()
+
+            if "error" in result:
+                return Response({"error": result["error"]["message"]}, status = status.HTTP_400_BAD_REQUEST)
+            
+            return Response({   
+                "message": "Successfully logged in!",
+                "uid": result["localId"],
+            }, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({
+                "error": str(e)
+            },status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            
+
+    @staticmethod
+    @api_view(['GET'])
+    def get_user_data(request, uid):
+        users = db.collection("users").where("uid","==",uid).get()
+
+        if not users:
+            return Response({"error": "User not found."}, status=status.HTTP_404_NOT_FOUND)
+        
+        return Response(users[0].to_dict(), status=status.HTTP_200_OK)
+    
 
 
 
