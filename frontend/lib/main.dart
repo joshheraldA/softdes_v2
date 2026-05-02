@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/view/Registration.dart';
+import 'package:frontend/viewmodel/LoginPageViewModel.dart';
 import 'package:frontend/viewmodel/RegistrationViewModel.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => RegistrationViewModel(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => RegistrationViewModel()),
+        ChangeNotifierProvider(create: (_) => LoginPageViewModel()),
+        // add other viewmodels here
+      ],
       child: const MyApp(),
     ),
   );
