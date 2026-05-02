@@ -86,11 +86,13 @@ class UserApi:
                 return Response({"error": result["error"]["message"]}, status = status.HTTP_400_BAD_REQUEST)
             
             return Response({   
+                "status": True,
                 "message": "Successfully logged in!",
                 "uid": result["localId"],
             }, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({
+                "status": False,
                 "error": str(e)
             },status=status.HTTP_500_INTERNAL_SERVER_ERROR)
             
@@ -101,7 +103,10 @@ class UserApi:
         users = db.collection("users").where("uid","==",uid).get()
 
         if not users:
-            return Response({"error": "User not found."}, status=status.HTTP_404_NOT_FOUND)
+            return Response({
+                "status": False,
+                "error": "User not found.",},
+                status=status.HTTP_404_NOT_FOUND)
         
         return Response(users[0].to_dict(), status=status.HTTP_200_OK)
     

@@ -1,42 +1,30 @@
 import 'dart:ui';
 
-import 'package:frontend/view/LoginPage.dart';
+import 'package:flutter/material.dart';
+import 'package:frontend/view/Registration.dart';
 import 'package:frontend/viewmodel/LoginPageViewModel.dart';
 import 'package:frontend/viewmodel/RegistrationViewModel.dart';
 import 'package:frontend/widgets/RoundedButton.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-import 'package:flutter/material.dart';
 import 'package:frontend/widgets/RoundedTextField.dart';
 import 'package:frontend/widgets/actionCard.dart';
-
 import 'package:provider/provider.dart';
 
-class RegistrationPage extends StatefulWidget {
-  const RegistrationPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<RegistrationPage> createState() => _RegistrationPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _RegistrationPageState extends State<RegistrationPage> {
-  final usernameController = TextEditingController();
+class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
   final double textFieldWidth = 0.27;
 
   @override
-  void dispose() {
-    usernameController.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final viewModel = context.watch<RegistrationViewModel>();
+    final viewModel = context.watch<LoginPageViewModel>();
 
     return Scaffold(
       body: Center(
@@ -92,19 +80,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         ),
                       ),
 
-                      Padding(
-                        padding: const EdgeInsets.only(top: 30.0),
-                        child: RoundedTextField(
-                          hintText: "username",
-                          labelText: "Username",
-                          height: MediaQuery.of(context).size.height * 0.1,
-                          width:
-                              MediaQuery.of(context).size.width *
-                              textFieldWidth,
-                          textController: usernameController,
-                        ),
-                      ),
-
                       RoundedTextField(
                         hintText: "email",
                         labelText: "Email",
@@ -144,14 +119,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => ChangeNotifierProvider(
-                                      create: (_) => LoginPageViewModel(),
-                                      child: const LoginPage(),
+                                      create: (_) => RegistrationViewModel(),
+                                      child: const RegistrationPage(),
                                     ),
                                   ),
                                 );
                               },
                               child: Text(
-                                "Use existing account",
+                                "Create Account",
                                 style: TextStyle(
                                   color: const Color.fromARGB(
                                     255,
@@ -185,10 +160,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         child: RoundedButton(
                           onPressed: () => {
                             viewModel.updateText(
-                              usernameController.text,
                               emailController.text,
                               passwordController.text,
                             ),
+                            if(viewModel.login_status){
+                              
+                            }
+
                           },
                           width: MediaQuery.of(context).size.width * 0.25,
                           height: MediaQuery.of(context).size.height * 0.06,
