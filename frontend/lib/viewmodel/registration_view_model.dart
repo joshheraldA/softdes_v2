@@ -32,7 +32,7 @@ class RegistrationViewModel extends ChangeNotifier {
         _text = "Failed: ${data['message']}";
       }
     } catch (e) {
-      _text = "Connection Failed: ${e}";
+      _text = "Connection Failed: $e";
     }
 
     notifyListeners();

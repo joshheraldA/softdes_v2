@@ -17,6 +17,8 @@ from abc import ABC, abstractmethod
 from typing import Optional
 from better_profanity import profanity
 
+
+
 profanity.load_censor_words()
 word_list = [str(word) for word in profanity.CENSOR_WORDSET]
 
@@ -138,7 +140,6 @@ class CheckProfanityHandler(AbstractCredentialsHandler):
             return "Email/username cannot contain profanity"
         else:
             return super().handle(request)
-
 
 
 

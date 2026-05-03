@@ -36,7 +36,7 @@ class _ActionCardState extends State<ActionCard> {
             offset: Offset(0, 1),
             blurRadius: 8,
             spreadRadius: -4,
-            color: Color(0xFF64000000),
+            color: Color.fromRGBO(0, 0, 0, 0.39)
           ),
         ]
 

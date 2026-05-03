@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/view/dashboard.dart';
 import 'package:frontend/viewmodel/registration_view_model.dart';
+import 'package:frontend/view/Registration.dart';
+import 'package:frontend/viewmodel/LoginPageViewModel.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => RegistrationViewModel(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => RegistrationViewModel()),
+        ChangeNotifierProvider(create: (_) => LoginPageViewModel()),
+        // add other viewmodels here
+      ],
       child: const MyApp(),
     ),
   );
@@ -17,6 +23,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: DashboardPage());
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: RegistrationPage(),
+    );
   }
 }
