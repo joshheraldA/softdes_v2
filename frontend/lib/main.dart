@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/view/Registration.dart';
-import 'package:frontend/viewmodel/RegistrationViewModel.dart';
+import 'package:frontend/view/dashboard.dart';
+import 'package:frontend/viewmodel/registration_view_model.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -17,6 +17,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: LoginPage());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: DashboardPage());
   }
 }
