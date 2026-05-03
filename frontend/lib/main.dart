@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/view/dash_board.dart';
+import 'package:frontend/view/home_page.dart';
 import 'package:frontend/viewmodel/dashboard_view_model.dart';
 import 'package:frontend/viewmodel/login_page_view_model.dart';
 import 'package:frontend/viewmodel/registration_view_model.dart';
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: DashboardPage(),
+      home: HomePage(),
     );
   }
 }

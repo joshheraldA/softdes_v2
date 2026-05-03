@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/utils/spacing_utils.dart';
+import 'package:frontend/view/calendar_page.dart';
+import 'package:frontend/view/dashboard_page.dart';
 import 'package:frontend/viewmodel/dashboard_view_model.dart';
 import 'package:frontend/widgets/menu_items_widget.dart';
 import 'package:provider/provider.dart';
 
-class DashboardPage extends StatefulWidget {
-  const DashboardPage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<DashboardPage> createState() => _DashboardPageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _DashboardPageState extends State<DashboardPage> {
+class _HomePageState extends State<HomePage> {
 
   final List<Widget> _pages = [
-    const Text("Dashboard pages"),
-    const Text("Schedule pages"),
+    const DashboardPage(),
+    const CalendarPage(),
     const Text("Account pages"),
   ];
 
@@ -61,12 +64,17 @@ class _DashboardPageState extends State<DashboardPage> {
                         }, 
                       ),
 
-                      MenuItemsWidget(
-                        icon: Icons.account_circle, 
-                        text: "Account", 
-                        pressed: () => {
-                          viewModel.updatePage(2)
-                        }, 
+                      const Spacer(),
+
+                      Padding(
+                        padding: EdgeInsets.only(bottom: SpacingUtils.heightSpacing(context, 0.024)),
+                        child: MenuItemsWidget(
+                          icon: Icons.account_circle, 
+                          text: "Account", 
+                          pressed: () => {
+                            viewModel.updatePage(2)
+                          }, 
+                        ),
                       ),
                     ],
                   ),
@@ -82,6 +90,7 @@ class _DashboardPageState extends State<DashboardPage> {
           )
         ],
       )
-    );
+    );  
   }
 }
+
