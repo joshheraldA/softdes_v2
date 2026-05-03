@@ -1,12 +1,12 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:frontend/view/Registration.dart';
-import 'package:frontend/viewmodel/LoginPageViewModel.dart';
-import 'package:frontend/viewmodel/RegistrationViewModel.dart';
-import 'package:frontend/widgets/RoundedButton.dart';
-import 'package:frontend/widgets/RoundedTextField.dart';
-import 'package:frontend/widgets/actionCard.dart';
+import 'package:frontend/view/registration.dart';
+import 'package:frontend/viewmodel/login_page_view_model.dart';
+import 'package:frontend/viewmodel/registration_view_model.dart';
+import 'package:frontend/widgets/action_card.dart';
+import 'package:frontend/widgets/rounded_button.dart';
+import 'package:frontend/widgets/rounded_text_field.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -163,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
                               emailController.text,
                               passwordController.text,
                             ),
-                            if(viewModel.login_status){
+                            if(viewModel.loginStatus){
                               
                             }
 

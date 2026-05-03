@@ -1,9 +1,9 @@
 import 'dart:ui';
 
+import 'package:frontend/view/login_page.dart';
+import 'package:frontend/viewmodel/login_page_view_model.dart';
 import 'package:frontend/viewmodel/registration_view_model.dart';
 import 'package:frontend/widgets/rounded_button.dart';
-import 'package:frontend/view/LoginPage.dart';
-import 'package:frontend/viewmodel/LoginPageViewModel.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:flutter/material.dart';

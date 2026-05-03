@@ -5,11 +5,11 @@ import 'package:http/http.dart' as http;
 class LoginPageViewModel extends ChangeNotifier{
     String _text = "";
     String _uid = "";
-    bool _login_status = false;
+    bool _loginStatus = false;
 
     String get text => _text;
     String get uid => _uid;
-    bool get login_status => _login_status;
+    bool get loginStatus => _loginStatus;
 
     void updateText(String email, String password) async {
 
@@ -29,13 +29,13 @@ class LoginPageViewModel extends ChangeNotifier{
       if (data['status']) {
         _text = "Success: ${data['message']}";
         _uid = data['uid'];
-        _login_status = true;
+        _loginStatus = true;
       } else {
         _text = "Failed: ${data['message']}";
       }
       }
       catch (e){
-        _text = "Connection Failed: ${e}";
+        _text = "Connection Failed: $e";
       }
       notifyListeners();
     }
