@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/widgets/indicator.dart';
-import 'package:frontend/widgets/action_card.dart';
+import 'package:frontend/viewmodel/dashboard_view_model.dart';
+import 'package:frontend/widgets/menu_items_widget.dart';
+import 'package:provider/provider.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -10,72 +11,76 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
+
+  final List<Widget> _pages = [
+    const Text("Dashboard pages"),
+    const Text("Schedule pages"),
+    const Text("Account pages"),
+  ];
+
   @override
   Widget build(BuildContext context) {
+    final viewModel = context.watch<DashboardViewModel>();
+
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 245, 245, 245),
-      body: Padding(
-        padding: const EdgeInsets.all(35.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-    
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-
-                ActionCard(
-                  width: MediaQuery.of(context).size.width * 0.4,
-                  height: MediaQuery.of(context).size.height * 0.1, 
-                  bgColor: const Color.fromARGB(255, 246, 246, 246),
-                  content: ProgBarIndicator(
-                    progress: 100, 
-                    width: MediaQuery.of(context).size.height * 0.1, 
-                    height: MediaQuery.of(context).size.height * 0.1,
-                    strokeWidth: 2,
-                    offset: 20,
-                  ),
-                  borderRadiusVal: MediaQuery.of(context).size.height * 0.1, 
-                ),    
-
-
-                SizedBox(width: 45), 
-                
-                ActionCard(
-                  width: MediaQuery.of(context).size.width * 0.4,
-                  height: MediaQuery.of(context).size.height * 0.1, 
-                  bgColor: const Color.fromARGB(255, 246, 246, 246),
-                  content: ProgBarIndicator(
-                    progress: 100, 
-                    width: MediaQuery.of(context).size.height * 0.1, 
-                    height: MediaQuery.of(context).size.height * 0.1
-                  ),
-                  borderRadiusVal: MediaQuery.of(context).size.height * 0.1, 
-                )        
-              ],
-
-
-
-
-
-              // children: [
-              //   Padding(
-              //     padding: EdgeInsets.all(8.0),
-              // R    child: ActionCard(
-              //       width: 110,
-              //       height: 110, 
-              //       content: Stack(
-              //         children: [
-              //           ProgBarIndicWidg(progress: 50, width: 110, height: 110)
-              //         ],
-              //       )
-              //     ),
-              //   ),
-              // ],
+      body: Row(
+        children: [
+          Container(
+            width: 250,
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 242, 241, 243),
             ),
-          ],
-        ),
+            child: Column(
+              children: [
+                ListTile(
+                  leading: Icon(Icons.track_changes, color: const Color.fromARGB(255, 41, 37, 37),),
+                  title: Text("MANAGEMENT TRACKER"),
+              
+                ),
+
+                SizedBox(
+                  height: 30,
+                ),
+
+                Expanded(
+                  child: Column(
+                    children: [
+                      MenuItemsWidget(
+                        icon: Icons.home, 
+                        text: "Dashoard", 
+                        pressed: () => {
+                          viewModel.updatePage(0)
+                        }, 
+                      ),
+
+                      MenuItemsWidget(
+                        icon: Icons.calendar_month, 
+                        text: "Calendar", 
+                        pressed: () => {
+                          viewModel.updatePage(1)
+                        }, 
+                      ),
+
+                      MenuItemsWidget(
+                        icon: Icons.account_circle, 
+                        text: "Account", 
+                        pressed: () => {
+                          viewModel.updatePage(2)
+                        }, 
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+           
+          Expanded(
+            child: Center(
+              child: _pages[viewModel.index]
+            ),
+          )
+        ],
       )
     );
   }
