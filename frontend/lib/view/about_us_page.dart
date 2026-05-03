@@ -308,7 +308,7 @@ class AboutUsPage extends StatelessWidget {
                           ),
                           SizedBox(height: 40),
                           RoundedButton(
-                            length: 210,
+                            height: 210,
                             width: 50,
                             backGroundColor: Color(0xFFe8c89a),
                             onPressed: () {},
@@ -344,7 +344,7 @@ class AboutUsPage extends StatelessWidget {
                           ),
                           SizedBox(height: 50),
                           RoundedButton(
-                            length: 210,
+                            height: 210,
                             width: 50,
                             backGroundColor: Color(0xFFe8c89a),
                             onPressed: () {},

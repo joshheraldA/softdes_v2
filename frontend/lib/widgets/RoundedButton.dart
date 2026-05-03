@@ -4,7 +4,7 @@ class RoundedButton extends StatelessWidget {
   final Color colors;
   final Color backGroundColor;
   final VoidCallback onPressed;
-  final double length;
+  final double height;
   final double width;
   final Widget child;
 
@@ -14,7 +14,7 @@ class RoundedButton extends StatelessWidget {
     required this.child,
     this.colors = Colors.black,
     this.backGroundColor = Colors.white,
-    this.length = 70,
+    this.height = 70,
     this.width = 30,
   });
 
@@ -23,7 +23,7 @@ class RoundedButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        minimumSize: Size(length, width),
+        minimumSize: Size(width, height),
         foregroundColor: colors,
         backgroundColor: backGroundColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
