@@ -3,6 +3,7 @@ import 'package:frontend/viewmodel/login_page_view_model.dart';
 import 'package:frontend/viewmodel/registration_view_model.dart';
 import 'package:frontend/view/registration.dart';
 import 'package:provider/provider.dart';
+import 'package:frontend/view/about_us_page.dart';
 
 void main() {
   runApp(
