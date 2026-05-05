@@ -80,13 +80,16 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
 
-                      RoundedTextField(
-                        hintText: "email",
-                        labelText: "Email",
-                        height: MediaQuery.of(context).size.height * 0.1,
-                        width:
-                            MediaQuery.of(context).size.width * textFieldWidth,
-                        textController: emailController,
+                      Padding(
+                        padding: const EdgeInsets.only(top: 30.0),
+                        child: RoundedTextField(
+                          hintText: "email",
+                          labelText: "Email",
+                          height: MediaQuery.of(context).size.height * 0.1,
+                          width:
+                              MediaQuery.of(context).size.width * textFieldWidth,
+                          textController: emailController,
+                        ),
                       ),
 
                       RoundedTextField(
@@ -98,7 +101,11 @@ class _LoginPageState extends State<LoginPage> {
                         textController: passwordController,
                       ),
 
-                      Text(viewModel.text, style: TextStyle(color: Colors.red)),
+                      Text(
+                        viewModel.text, 
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.red)
+                      ),
 
                       Divider(
                         indent: 60,

@@ -6,6 +6,7 @@ class ActionCard extends StatefulWidget {
   final Color bgColor;
   final Widget content;
   final double? borderRadiusVal;
+  final List<BoxShadow>? boxShadows;
 
   const ActionCard({
     super.key,
@@ -13,6 +14,7 @@ class ActionCard extends StatefulWidget {
     required this.height,
     required this.content,
     this.bgColor = Colors.white,
+    this.boxShadows,
     this.borderRadiusVal,
   });
 
@@ -31,16 +33,9 @@ class _ActionCardState extends State<ActionCard> {
       decoration: BoxDecoration(
         color: widget.bgColor,
         borderRadius: BorderRadius.circular(widget.borderRadiusVal ?? 0.0),
-        boxShadow: [
-          BoxShadow(
-            offset: Offset(0, 1),
-            blurRadius: 8,
-            spreadRadius: -4,
-            color: Color.fromRGBO(0, 0, 0, 0.39)
-          ),
-        ]
-
+        boxShadow: widget.boxShadows ?? []
       ),
+      alignment: Alignment.centerLeft,
       child: widget.content,
     );
   }
