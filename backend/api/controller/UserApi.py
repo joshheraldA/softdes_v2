@@ -40,7 +40,8 @@ class UserApi:
                     "email": data["email"],
                     "uid": user.uid,
                     "ces_points": 0,
-                    "department": "Computer Engineering"
+                    "department": "Computer Engineering",
+                    "active_participating_ces_activities" : []
                     })
                 user_doc = db.collection("users").document(user.uid).get()
 

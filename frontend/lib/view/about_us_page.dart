@@ -9,7 +9,7 @@ class AboutUsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
           width: 1536,
 
           // padding: EdgeInsets.only(left: 80, right: 80),
@@ -184,7 +184,7 @@ class AboutUsPage extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 16),
-                          Container(
+                          SizedBox(
                             height: 150,
                             width: 300,
                             child: Text(
@@ -211,7 +211,7 @@ class AboutUsPage extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 16),
-                          Container(
+                          SizedBox(
                             height: 150,
                             width: 300,
                             child: Text(
@@ -237,7 +237,7 @@ class AboutUsPage extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 16),
-                          Container(
+                          SizedBox(
                             height: 150,
                             width: 300,
                             child: Text(
@@ -274,7 +274,7 @@ class AboutUsPage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 30),
-                    Container(
+                    SizedBox(
                       width: 750,
                       child: Text(
                         "Josh's Doctor Playhouse is a software development company that strives to design clear, secure, and scaleable solutions through enhanced communication. We take pride in our ability to connect with our clients in order to wholly understand their problems and what solutions they need. ",
