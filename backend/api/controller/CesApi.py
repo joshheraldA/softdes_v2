@@ -4,6 +4,7 @@ from rest_framework.response import Response
 
 from api.middleware.CredentialsHandler import CheckProfanityHandler
 from api.firebase import db
+from google.cloud.firestore_v1 import ArrayUnion, ArrayRemove
 
 from api.utils.idFactory import IdFactory
 
@@ -79,7 +80,7 @@ class CesApi:
 
         return Response({
             'status': True,
-            'activites': activity_list
+            'data': activity_list
         })
 
 
@@ -113,3 +114,49 @@ class CesApi:
             'status': True,
             'data': info_list
         }, status=status.HTTP_200_OK)
+    
+
+    @staticmethod
+    @api_view(['POST'])
+    def participate_ces_activity(request):
+
+        
+        data = request.data
+        ces_ref = db.collection("CESArchive").document(data["ces_uid"])  
+        ces_snapshot = ces_ref.get()  # using .get to check if it exists
+
+        user_ref = db.collection("users")
+        query = list(user_ref.where("uid", "==", data["uid"]).stream())
+
+        if ces_snapshot.exists:  
+            if query:
+                user_doc_ref = query[0].reference
+                user_doc_ref.update({
+                    "active_participating_ces_activities": ArrayUnion([data["ces_uid"]])
+                })
+
+                ces_ref.update({  # updating using the reference document
+                    "volunteers": ArrayUnion([data["uid"]])
+                })
+
+                return Response({
+                    "status": True,
+                    "message": "Successfully joined the CES activity"
+                }, status=status.HTTP_200_OK)
+
+            return Response({
+                "status": False,
+                "message": "User not found"
+            }, status=status.HTTP_404_NOT_FOUND)
+
+        return Response({
+            "status": False,
+            "message": "CES Activity not found"
+        }, status=status.HTTP_404_NOT_FOUND)
+        
+
+        
+
+
+        
+
