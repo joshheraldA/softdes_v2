@@ -1,42 +1,30 @@
 import 'dart:ui';
 
-import 'package:frontend/view/login_page.dart';
+import 'package:flutter/material.dart';
+import 'package:frontend/view/registration.dart';
 import 'package:frontend/viewmodel/login_page_view_model.dart';
 import 'package:frontend/viewmodel/registration_view_model.dart';
-import 'package:frontend/widgets/rounded_button.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-import 'package:flutter/material.dart';
-import 'package:frontend/widgets/rounded_text_field.dart';
 import 'package:frontend/widgets/action_card.dart';
-
+import 'package:frontend/widgets/rounded_button.dart';
+import 'package:frontend/widgets/rounded_text_field.dart';
 import 'package:provider/provider.dart';
 
-class RegistrationPage extends StatefulWidget {
-  const RegistrationPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<RegistrationPage> createState() => _RegistrationPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _RegistrationPageState extends State<RegistrationPage> {
-  final usernameController = TextEditingController();
+class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
   final double textFieldWidth = 0.27;
 
   @override
-  void dispose() {
-    usernameController.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final viewModel = context.watch<RegistrationViewModel>();
+    final viewModel = context.watch<LoginPageViewModel>();
 
     return Scaffold(
       body: Center(
@@ -49,7 +37,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   height: double.infinity,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage("assets/login_background2.jpeg"),
+                      image: AssetImage("assets/JHYA_LP_image1.png"),
                       fit: BoxFit.cover,
                       filterQuality:
                           FilterQuality.high, // Adds better anti-aliasing
@@ -62,7 +50,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
             // blues the background image
             ClipRect(
               child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   height: double.infinity,
@@ -71,30 +59,17 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ),
             ),
 
-            Center(
+            Positioned(
+              left: MediaQuery.of(context).size.width * 0.12,
+              top: MediaQuery.of(context).size.height * 0.1,
               child: ActionCard(
                 width: MediaQuery.of(context).size.width * 0.34,
                 height: MediaQuery.of(context).size.height * 0.75,
                 bgColor: const Color.fromARGB(255, 255, 255, 255),
                 content: Padding(
-
                   padding: const EdgeInsets.only(top: 60),
                   child: Column(
                     children: [
-                      Text(
-                        "CES MANAGEMENT TRACKER",
-                        style: TextStyle( 
-                          fontFamily: GoogleFonts.inter().fontFamily, 
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold
-                        ),
-                      ),
-
-                      SizedBox(
-                        height: 30,
-                        width: 30,
-                      ),
-
                       Container(
                         width: MediaQuery.of(context).size.width * 0.2,
                         height: MediaQuery.of(context).size.height * 0.11,
@@ -102,19 +77,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           image: DecorationImage(
                             image: AssetImage("assets/logo.png"),
                           ),
-                        ),
-                      ),
-
-                      Padding(
-                        padding: const EdgeInsets.only(top: 30.0),
-                        child: RoundedTextField(
-                          hintText: "username",
-                          labelText: "Username",
-                          height: MediaQuery.of(context).size.height * 0.1,
-                          width:
-                              MediaQuery.of(context).size.width *
-                              textFieldWidth,
-                          textController: usernameController,
                         ),
                       ),
 
@@ -126,9 +88,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             MediaQuery.of(context).size.width * textFieldWidth,
                         textController: emailController,
                       ),
-                      
-
-              
 
                       RoundedTextField(
                         hintText: "password",
@@ -139,18 +98,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         textController: passwordController,
                       ),
 
-                      Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Text(
-                          viewModel.text,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontFamily: GoogleFonts.inter().fontFamily,
-                            color: Colors.red,
-                            letterSpacing: 1,
-                          ),
-                        ),
-                      ),
+                      Text(viewModel.text, style: TextStyle(color: Colors.red)),
 
                       Divider(
                         indent: 60,
@@ -159,7 +107,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         color: const Color.fromARGB(255, 192, 192, 192),
                       ),
 
-                                            Padding(
+                      Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 60.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment
@@ -171,14 +119,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => ChangeNotifierProvider(
-                                      create: (_) => LoginPageViewModel(),
-                                      child: const LoginPage(),
+                                      create: (_) => RegistrationViewModel(),
+                                      child: const RegistrationPage(),
                                     ),
                                   ),
                                 );
                               },
                               child: Text(
-                                "Use existing account",
+                                "Create Account",
                                 style: TextStyle(
                                   color: const Color.fromARGB(
                                     255,
@@ -206,25 +154,31 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           ],
                         ),
                       ),
-                      SizedBox(
-                        height: 30,
-                        width: 30,
-                      ),
 
-                      RoundedButton(
-                        onPressed: () => {
-                          viewModel.updateText(
-                            usernameController.text,
-                            emailController.text,
-                            passwordController.text,
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20),
+                        child: RoundedButton(
+                          onPressed: () => {
+                            viewModel.updateText(
+                              emailController.text,
+                              passwordController.text,
+                            ),
+                            if(viewModel.loginStatus){
+                              
+                            }
+
+                          },
+                          width: MediaQuery.of(context).size.width * 0.25,
+                          height: MediaQuery.of(context).size.height * 0.06,
+                          backGroundColor: const Color.fromARGB(
+                            255,
+                            104,
+                            206,
+                            136,
                           ),
-                        },
-                        borderVal: 0,
-                        height: MediaQuery.of(context).size.height * 0.075,
-                        width:
-                            MediaQuery.of(context).size.width * textFieldWidth,
-                        child: Text("Submit"),
-
+                          colors: Colors.white,
+                          child: Text("Submit"),
+                        ),
                       ),
                     ],
                   ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/widgets/RoundedButton.dart';
+import 'package:frontend/widgets/rounded_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AboutUsPage extends StatelessWidget {
