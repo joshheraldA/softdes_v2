@@ -57,6 +57,17 @@ dev_dependencies:
 flutter:
   assets:
     - assets/JHYA_LP_image1.png
+    - assets/testimg1.jpg
+    - assets/mottoSection.jpg
+    - assets/ourVision.jpg
+    - assets/ourMission.jpg
+    - assets/featureIcon1.png
+    - assets/featureIcon2.png
+    - assets/featureIcon3.png
+    - assets/facebookIcon.png
+    - assets/instagramIcon.png
+    - assets/xIcon.png
+    - assets/location.png
     - assets/                       # Everything in the folder
     - assets/logo.png
   # The following line ensures that the Material Icons font is
