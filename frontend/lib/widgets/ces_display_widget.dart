@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/viewmodel/ces_display_view_model.dart';
+import 'package:frontend/viewmodel/dashboard_view_model.dart';
 import 'package:frontend/widgets/rounded_button.dart';
 import 'package:provider/provider.dart';
 
 class CesDisplayWidget extends StatefulWidget {
   final Map<String, dynamic> activity;
+  final Map<String, dynamic> user;
 
-  const CesDisplayWidget({super.key, required this.activity});
+  const CesDisplayWidget({super.key, required this.activity, required this.user});
 
   @override
   State<CesDisplayWidget> createState() => _CesDisplayWidgetState();
@@ -34,8 +36,10 @@ class _CesDisplayWidgetState extends State<CesDisplayWidget> {
         ), // Displays: Educational
         Text("${widget.activity['volunteers'].length}/40"),
         RoundedButton(onPressed: () {
-          print("HELLO");
-        }, child: Text("Join"))
+          context.read<DashboardViewModel>().joinActivity(widget.user['uid'], widget.activity['uid']);
+        },
+        child: Text("Join")
+        )
       ].toList(),
     );
   }

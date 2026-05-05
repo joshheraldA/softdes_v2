@@ -48,7 +48,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         final activity = viewModel.boxes[index];
                         return Padding(
                           padding: const EdgeInsets.only(top: 30.0),
-                          child: CesDisplayWidget(activity: activity),
+                          child: CesDisplayWidget(activity: activity, user: widget.user,),
                         );
                       },
                     ),
