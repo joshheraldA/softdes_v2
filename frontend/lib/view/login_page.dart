@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:frontend/view/home_page.dart';
 import 'package:frontend/view/registration.dart';
 import 'package:frontend/viewmodel/login_page_view_model.dart';
 import 'package:frontend/viewmodel/registration_view_model.dart';
@@ -171,7 +172,9 @@ class _LoginPageState extends State<LoginPage> {
                               passwordController.text,
                             ),
                             if(viewModel.loginStatus){
-                              
+                              Navigator.push(context, 
+                                MaterialPageRoute(builder: (context) => HomePage(user: viewModel.user))
+                              )
                             }
 
                           },

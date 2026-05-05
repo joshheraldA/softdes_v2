@@ -71,12 +71,12 @@ class UserApi:
     @api_view(['POST'])
     def login_user(request):
         data = request.data
-
+        email = request.GET.get('email')
         try: 
             response = requests.post(
             f"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBBVORwC933IYYmIOL7Sa56xISlhN4Pr90",
             json={
-                "email": data["email"],
+                "email": email,
                 "password": data["password"],
                 "returnSecureToken": True
                 }
@@ -86,10 +86,16 @@ class UserApi:
             if "error" in result:
                 return Response({"error": result["error"]["message"]}, status = status.HTTP_400_BAD_REQUEST)
 
+
+            users_query = db.collection("users").where("email","==",email).get()
+
+            user_data = users_query[0].to_dict() if users_query else {}
+
             return Response({   
                 "status": True,
                 "message": "Successfully logged in!",
-                "uid": result["localId"],
+                "user": user_data,
+                "uid": result['localId']
             }, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({

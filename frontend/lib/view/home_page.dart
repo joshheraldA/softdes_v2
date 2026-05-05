@@ -9,19 +9,32 @@ import 'package:frontend/widgets/menu_items_widget.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final Map<String, dynamic> user;
+
+  const HomePage({
+    super.key,
+    required this.user
+  });
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<Widget> _pages = [
-    const DashboardPage(),
-    const CalendarPage(),
-    const AccountPage(),
-    const ArchivePage(),
-  ];
+
+late List<Widget> _pages;
+
+  @override
+  void initState() {
+    super.initState();
+    // 2. Now you can safely access 'widget'
+    _pages = [
+      DashboardPage(user: widget.user), // No 'const' here because widget.user is dynamic
+      const CalendarPage(),
+      const AccountPage(),
+      const ArchivePage(),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {

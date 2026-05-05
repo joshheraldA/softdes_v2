@@ -6,7 +6,12 @@ import 'package:frontend/widgets/ces_display_widget.dart';
 import 'package:provider/provider.dart';
 
 class DashboardPage extends StatefulWidget {
-  const DashboardPage({super.key});
+  final Map<String, dynamic> user;
+
+  const DashboardPage({
+    super.key,
+    required this.user
+  });
 
   @override
   State<DashboardPage> createState() => _DashboardPageState();
@@ -35,12 +40,18 @@ class _DashboardPageState extends State<DashboardPage> {
                 ActionCard(
                   width: SizeUtils.width(context, 0.379),
                   height: SizeUtils.height(context, 0.3),
-                  content: ListView.builder(
-                    itemCount: viewModel.boxes.length,
-                    itemBuilder: (context, index) {
-                      final activity = viewModel.boxes[index];
-                      return CesDisplayWidget(activity: activity);
-                    },
+                  content: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                    child: ListView.builder(
+                      itemCount: viewModel.boxes.length,
+                      itemBuilder: (context, index) {
+                        final activity = viewModel.boxes[index];
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 30.0),
+                          child: CesDisplayWidget(activity: activity),
+                        );
+                      },
+                    ),
                   ),
                   boxShadows: [
                     BoxShadow(
@@ -56,7 +67,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 ActionCard(
                   width: SizeUtils.width(context, 0.379),
                   height: SizeUtils.height(context, 0.3),
-                  content: Text("HLLO"),
+                  content: Text("${widget.user['username']}"),
                   boxShadows: [
                     BoxShadow(
                       color: const Color.fromARGB(170, 200, 200, 200),

@@ -5,15 +5,17 @@ import 'package:http/http.dart' as http;
 class LoginPageViewModel extends ChangeNotifier{
     String _text = "";
     String _uid = "";
+    Map<String, dynamic> _user = {};
     bool _loginStatus = false;
 
     String get text => _text;
     String get uid => _uid;
     bool get loginStatus => _loginStatus;
+    Map<String, dynamic> get user => _user;
 
     void updateText(String email, String password) async {
 
-      final url = Uri.parse("http://127.0.0.1:8000/api/v1/login-user/");
+      final url = Uri.parse("http://127.0.0.1:8000/api/v1/login-user/?email=$email");
 
       try {
       final response = await http.post(
@@ -30,6 +32,7 @@ class LoginPageViewModel extends ChangeNotifier{
         _text = "Success: ${data['message']}";
         _uid = data['uid'];
         _loginStatus = true;
+        _user = data['user'];
       } else {
         _text = "Failed: ${data['message']}";
       }
