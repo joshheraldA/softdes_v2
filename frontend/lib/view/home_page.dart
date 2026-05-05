@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/utils/spacing_utils.dart';
+import 'package:frontend/view/account_page.dart';
+import 'package:frontend/view/archive_page.dart';
 import 'package:frontend/view/calendar_page.dart';
 import 'package:frontend/view/dashboard_page.dart';
 import 'package:frontend/viewmodel/dashboard_view_model.dart';
@@ -18,7 +20,8 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _pages = [
     const DashboardPage(),
     const CalendarPage(),
-    const Text("Account pages"),
+    const AccountPage(),
+    const ArchivePage()
   ];
 
   @override
@@ -31,18 +34,38 @@ class _HomePageState extends State<HomePage> {
           Container(
             width: 250,
             decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 242, 241, 243),
+              color: const Color.fromARGB(255, 255, 255, 255),
             ),
             child: Column(
               children: [
-                ListTile(
-                  leading: Icon(Icons.track_changes, color: const Color.fromARGB(255, 41, 37, 37),),
-                  title: Text("MANAGEMENT TRACKER"),
-              
+                Padding(
+                  padding: const EdgeInsets.only(top: 15.0),
+                  child: ListTile(
+                    leading: Icon(Icons.track_changes, color: const Color.fromARGB(255, 41, 37, 37),),
+                    title: Text(
+                      "MANAGEMENT TRACKER",
+                      style: TextStyle(
+                        letterSpacing: 1.5
+                      ),
+                    
+                    )
+                                
+                  ),
                 ),
 
                 SizedBox(
-                  height: 30,
+                  height: 10,
+                ),
+
+                Divider(
+                  indent: 20,
+                  endIndent: 20,
+                  thickness: 1,
+                  color: const Color.fromARGB(255, 41, 37, 37),
+                ),
+
+                SizedBox(
+                  height: 20,
                 ),
 
                 Expanded(
@@ -62,6 +85,14 @@ class _HomePageState extends State<HomePage> {
                         pressed: () => {
                           viewModel.updatePage(1)
                         }, 
+                      ),
+
+                      MenuItemsWidget(
+                        icon: Icons.archive, 
+                        text: "Archive", 
+                        pressed: () => {
+                          viewModel.updatePage(3)
+                        }
                       ),
 
                       const Spacer(),
@@ -84,8 +115,13 @@ class _HomePageState extends State<HomePage> {
           ),
            
           Expanded(
-            child: Center(
-              child: _pages[viewModel.index]
+            child: Container(
+              width: double.infinity,
+              height: double.infinity,
+              color: const Color.fromARGB(255, 250, 250, 250),
+              child: Center(
+                child: _pages[viewModel.index]
+              ),
             ),
           )
         ],

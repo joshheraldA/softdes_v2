@@ -84,7 +84,7 @@ class UserApi:
 
             if "error" in result:
                 return Response({"error": result["error"]["message"]}, status = status.HTTP_400_BAD_REQUEST)
-            
+
             return Response({   
                 "status": True,
                 "message": "Successfully logged in!",
