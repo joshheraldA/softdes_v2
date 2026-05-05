@@ -6,6 +6,7 @@ class RoundedButton extends StatelessWidget {
   final VoidCallback onPressed;
   final double height;
   final double width;
+  final double borderVal;
   final Widget child;
 
   const RoundedButton({
@@ -16,6 +17,7 @@ class RoundedButton extends StatelessWidget {
     this.backGroundColor = Colors.white,
     this.height = 70,
     this.width = 30,
+    this.borderVal = 12
   });
 
   @override
@@ -26,7 +28,7 @@ class RoundedButton extends StatelessWidget {
         minimumSize: Size(width, height),
         foregroundColor: colors,
         backgroundColor: backGroundColor,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderVal)),
       ),
       child: child,
     );
