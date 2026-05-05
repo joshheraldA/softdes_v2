@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/utils/size_utils.dart';
+import 'package:frontend/utils/spacing_utils.dart';
 import 'package:frontend/viewmodel/dashboard_view_model.dart';
 import 'package:frontend/widgets/action_card.dart';
 import 'package:frontend/widgets/ces_display_widget.dart';
@@ -40,18 +41,36 @@ class _DashboardPageState extends State<DashboardPage> {
                 ActionCard(
                   width: SizeUtils.width(context, 0.379),
                   height: SizeUtils.height(context, 0.3),
-                  content: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                    child: ListView.builder(
-                      itemCount: viewModel.boxes.length,
-                      itemBuilder: (context, index) {
-                        final activity = viewModel.boxes[index];
-                        return Padding(
-                          padding: const EdgeInsets.only(top: 30.0),
-                          child: CesDisplayWidget(activity: activity, user: widget.user,),
-                        );
-                      },
-                    ),
+                  content: Column(
+                    children: [
+                      Container(
+                        height: 30,
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 245, 245, 245),
+                          borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10))
+                        ),
+                        child: Row(children: [
+                          SizedBox(width: SpacingUtils.widthSpacing(context, 0.027)),
+                          Text("Title", style: TextStyle(fontWeight: FontWeight.bold),),
+                          SizedBox(width: SpacingUtils.widthSpacing(context, 0.105)),
+                          Text("Type", style: TextStyle(fontWeight: FontWeight.bold),),
+                          SizedBox(width: SpacingUtils.widthSpacing(context, 0.065),),
+                          Text("Volunteers", style: TextStyle(fontWeight: FontWeight.bold),)
+                        ],)
+                      ),
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: viewModel.boxes.length,
+                          itemBuilder: (context, index) {
+                            final activity = viewModel.boxes[index];
+                            return Padding(
+                              padding: const EdgeInsets.only(top: 5, left: 20, right: 20),
+                              child: CesDisplayWidget(activity: activity, user: widget.user,),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                   boxShadows: [
                     BoxShadow(

@@ -119,8 +119,6 @@ class CesApi:
     @staticmethod
     @api_view(['POST'])
     def participate_ces_activity(request):
-
-        email = request.GET.get('email')   
            
         data = request.data
         ces_ref = db.collection("CESArchive").document(data["ces_uid"])  

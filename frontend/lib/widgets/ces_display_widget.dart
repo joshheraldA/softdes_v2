@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/utils/size_utils.dart';
 import 'package:frontend/viewmodel/ces_display_view_model.dart';
 import 'package:frontend/viewmodel/dashboard_view_model.dart';
 import 'package:frontend/widgets/rounded_button.dart';
@@ -18,7 +19,7 @@ class _CesDisplayWidgetState extends State<CesDisplayWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = Provider.of<CesDisplayViewModel>(context);
+    final viewModel = context.watch<CesDisplayViewModel>();
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -38,7 +39,15 @@ class _CesDisplayWidgetState extends State<CesDisplayWidget> {
         RoundedButton(onPressed: () {
           context.read<DashboardViewModel>().joinActivity(widget.user['uid'], widget.activity['uid']);
         },
-        child: Text("Join")
+        height: SizeUtils.height(context, 0.045),
+        backGroundColor: const Color.fromARGB(255, 255, 226, 183),
+        child: Text(
+          "Join",
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold
+          ),
+        )
         )
       ].toList(),
     );
