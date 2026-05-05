@@ -79,7 +79,7 @@ class CesApi:
 
         return Response({
             'status': True,
-            'activites': activity_list
+            'data': activity_list
         })
 
 

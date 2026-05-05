@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/utils/size_utils.dart';
 import 'package:frontend/viewmodel/dashboard_view_model.dart';
 import 'package:frontend/widgets/action_card.dart';
+import 'package:frontend/widgets/ces_display_widget.dart';
 import 'package:provider/provider.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -12,7 +13,6 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-
   @override
   void initState() {
     super.initState();
@@ -21,7 +21,6 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
-  
     final viewModel = context.watch<DashboardViewModel>();
 
     return Padding(
@@ -34,51 +33,45 @@ class _DashboardPageState extends State<DashboardPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ActionCard(
-                  width: SizeUtils.width(context, 0.379), 
-                  height: SizeUtils.height(context, 0.3), 
-                  content: Column(
-                    // Add <Widget> here to force the type
-                    children: <Widget>[
-                      ...viewModel.boxes.map((activity) {
-                        return Row(
-                          children: [
-                            Text("${activity['title']}"),
-                          ].toList(),
-                        );
-                      }).toList(),
-                    ],
+                  width: SizeUtils.width(context, 0.379),
+                  height: SizeUtils.height(context, 0.3),
+                  content: ListView.builder(
+                    itemCount: viewModel.boxes.length,
+                    itemBuilder: (context, index) {
+                      final activity = viewModel.boxes[index];
+                      return CesDisplayWidget(activity: activity);
+                    },
                   ),
                   boxShadows: [
                     BoxShadow(
                       color: const Color.fromARGB(170, 200, 200, 200),
-                      spreadRadius: 0, 
-                      blurRadius: 1, 
-                      offset: const Offset(0, 1), 
+                      spreadRadius: 0,
+                      blurRadius: 1,
+                      offset: const Offset(0, 1),
                     ),
                   ],
                   borderRadiusVal: 10,
                 ),
 
                 ActionCard(
-                  width: SizeUtils.width(context, 0.379), 
-                  height: SizeUtils.height(context, 0.3), 
+                  width: SizeUtils.width(context, 0.379),
+                  height: SizeUtils.height(context, 0.3),
                   content: Text("HLLO"),
                   boxShadows: [
                     BoxShadow(
                       color: const Color.fromARGB(170, 200, 200, 200),
-                      spreadRadius: 0, 
-                      blurRadius: 1, 
-                      offset: const Offset(0, 1), 
+                      spreadRadius: 0,
+                      blurRadius: 1,
+                      offset: const Offset(0, 1),
                     ),
                   ],
                   borderRadiusVal: 10,
                 ),
-
               ],
-            )
+            ),
           ],
         ),
-      )
-    );  
+      ),
+    );
   }
 }
