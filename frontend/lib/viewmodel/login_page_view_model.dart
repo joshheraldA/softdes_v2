@@ -34,7 +34,7 @@ class LoginPageViewModel extends ChangeNotifier{
         _loginStatus = true;
         _user = data['user'];
       } else {
-        _text = "Failed: ${data['message']}";
+        _text = "Failed: ${data['error']}";
       }
       }
       catch (e){

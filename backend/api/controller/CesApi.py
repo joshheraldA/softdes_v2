@@ -155,7 +155,27 @@ class CesApi:
         
 
         
+    @staticmethod
+    @api_view(['GET'])
+    def find_activity(request):
+        uid = request.GET.get("uid")
+
+        ces_ref = db.collection("CESArchive").document(uid)
+        ces_snapshot = ces_ref.get()
 
 
+        if ces_snapshot.exists:
+            ces_data = ces_snapshot.to_dict()
+
+            return Response({
+                'status': True,
+                'data': ces_data
+            }, status=status.HTTP_200_OK)
         
+        else:
+            return Response({
+                'status': False,
+                'message': "Could not find activity"
+            }, status=status.HTTP_404_NOT_FOUND)
+
 

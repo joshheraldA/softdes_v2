@@ -37,7 +37,7 @@ class _CesDisplayWidgetState extends State<CesDisplayWidget> {
         ), // Displays: Educational
         Text("${widget.activity['volunteers'].length}/40"),
         RoundedButton(onPressed: () {
-          context.read<DashboardViewModel>().joinActivity(widget.user['uid'], widget.activity['uid']);
+          context.read<DashboardViewModel>().joinActivity(widget.user['uid'], widget.activity['uid'], widget.user['active_participating_ces_activities']);
         },
         height: SizeUtils.height(context, 0.045),
         backGroundColor: const Color.fromARGB(255, 255, 226, 183),

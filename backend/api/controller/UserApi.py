@@ -84,7 +84,10 @@ class UserApi:
             result = response.json()
 
             if "error" in result:
-                return Response({"error": result["error"]["message"]}, status = status.HTTP_400_BAD_REQUEST)
+                return Response({
+                    "status": False,
+                    "error": "Invalid Credentials"
+                }, status = status.HTTP_400_BAD_REQUEST)
 
 
             users_query = db.collection("users").where("email","==",email).get()
