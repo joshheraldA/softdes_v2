@@ -93,4 +93,28 @@ class DashboardViewModel extends ChangeNotifier {
     }
 
   }
+
+  Future<void> leaveActivity(String uid, String cesUid, List<dynamic> uids) async {
+    final url = Uri.parse("http://127.0.0.1:8000/api/v1/leave-activity/");
+    try {
+      final response = await http.post(
+        url,
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({
+          "uid": uid,
+          "ces_uid": cesUid,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        await getActivities();
+
+        uids.remove(cesUid); // opposite of uids.add(cesUid) in joinActivity
+
+        await joinedActivities(uids);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 }

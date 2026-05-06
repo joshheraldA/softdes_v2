@@ -14,5 +14,6 @@ urlpatterns = [
     path("get-ces/", CesApi.get_ces, name="getces"),
     path("get-display/", CesApi.get_display_info, name="getinfo"),
     path("add-participant/", CesApi.participate_ces_activity, name="participatecesactivity"),
-    path("find-activity/", CesApi.find_activity, name='findactivity')
+    path("find-activity/", CesApi.find_activity, name='findactivity'),
+    path("leave-activity/", CesApi.leave_ces_activity, name='leaveactivity'),
 ]

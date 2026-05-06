@@ -5,17 +5,17 @@ import 'package:frontend/viewmodel/dashboard_view_model.dart';
 import 'package:frontend/widgets/rounded_button.dart';
 import 'package:provider/provider.dart';
 
-class CesDisplayWidget extends StatefulWidget {
+class UserCesDisplayWidget extends StatefulWidget {
   final Map<String, dynamic> activity;
   final Map<String, dynamic> user;
 
-  const CesDisplayWidget({super.key, required this.activity, required this.user});
+  const UserCesDisplayWidget({super.key, required this.activity, required this.user});
 
   @override
-  State<CesDisplayWidget> createState() => _CesDisplayWidgetState();
+  State<UserCesDisplayWidget> createState() => _UserCesDisplayWidgetState();
 }
 
-class _CesDisplayWidgetState extends State<CesDisplayWidget> {
+class _UserCesDisplayWidgetState extends State<UserCesDisplayWidget> {
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +37,12 @@ class _CesDisplayWidgetState extends State<CesDisplayWidget> {
         ), // Displays: Educational
         Text("${widget.activity['volunteers'].length}/40"),
         RoundedButton(onPressed: () {
-          context.read<DashboardViewModel>().joinActivity(widget.user['uid'], widget.activity['uid'], widget.user['active_participating_ces_activities']);
+          context.read<DashboardViewModel>().leaveActivity(widget.user['uid'], widget.activity['uid'], widget.user['active_participating_ces_activities']);
         },
         height: SizeUtils.height(context, 0.045),
-        backGroundColor: const Color.fromARGB(255, 133, 224, 73),
+        backGroundColor: const Color.fromARGB(255, 228, 81, 81),
         child: Text(
-          "Join",
+          "Leave",
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold

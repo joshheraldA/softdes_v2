@@ -121,7 +121,7 @@ class CesApi:
     def participate_ces_activity(request):
            
         data = request.data
-        ces_ref = db.collection("CESArchive").document(data["ces_uid"])  
+        ces_ref = db.collection("CESArchive").document(data["ces_uid"])
         ces_snapshot = ces_ref.get()  # using .get to check if it exists
 
         user_ref = db.collection("users")
@@ -177,5 +177,43 @@ class CesApi:
                 'status': False,
                 'message': "Could not find activity"
             }, status=status.HTTP_404_NOT_FOUND)
+        
+
+    @staticmethod
+    @api_view(['POST'])
+    def leave_ces_activity(request):
+        data = request.data
+
+        user_ref = db.collection("users")
+        query = list(user_ref.where("uid", "==", data["uid"]).stream())
+        ces_ref = db.collection("CESArchive").document(data["ces_uid"])
+        ces_snapshot = ces_ref.get()
+
+        if ces_snapshot.exists:
+            if query:
+                user_doc_ref = query[0].reference
+                user_doc_ref.update({
+                    "active_participating_ces_activities": ArrayRemove([data["ces_uid"]])
+                })
+
+                ces_ref.update({
+                    "volunteers": ArrayRemove([data["uid"]])
+                })
+
+                return Response({
+                    "status": True,
+                    "message": "Successfully unjoined the CES activity"
+                }, status=status.HTTP_200_OK)
+
+            return Response({
+                "status": False,
+                "message": "User not found"
+            }, status=status.HTTP_404_NOT_FOUND)
+
+        return Response({
+            "status": False,
+            "message": "CES Activity not found"
+        }, status=status.HTTP_404_NOT_FOUND)
+
 
 

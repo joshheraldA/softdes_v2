@@ -4,6 +4,7 @@ import 'package:frontend/utils/spacing_utils.dart';
 import 'package:frontend/viewmodel/dashboard_view_model.dart';
 import 'package:frontend/widgets/action_card.dart';
 import 'package:frontend/widgets/ces_display_widget.dart';
+import 'package:frontend/widgets/user_ces_display_widget.dart';
 import 'package:provider/provider.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -114,7 +115,7 @@ class _DashboardPageState extends State<DashboardPage> {
                             final activity = viewModel.activitiesParticipating[index];
                             return Padding(
                               padding: const EdgeInsets.only(top: 5, left: 20, right: 20),
-                              child: CesDisplayWidget(activity: activity, user: widget.user,),
+                              child: UserCesDisplayWidget(activity: activity, user: widget.user,),
                             );
                           },
                         ),
