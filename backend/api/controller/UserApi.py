@@ -16,7 +16,7 @@ from api.middleware.CredentialsHandler import CheckProfanityHandler, CheckSchool
 from firebase_admin import auth, firestore
 import requests
 
-db = firestore.client()
+from api.firebase import db
 
 class UserApi:
 

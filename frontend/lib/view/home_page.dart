@@ -16,12 +16,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   final List<Widget> _pages = [
     const DashboardPage(),
     const CalendarPage(),
     const AccountPage(),
-    const ArchivePage()
+    const ArchivePage(),
   ];
 
   @override
@@ -41,21 +40,18 @@ class _HomePageState extends State<HomePage> {
                 Padding(
                   padding: const EdgeInsets.only(top: 15.0),
                   child: ListTile(
-                    leading: Icon(Icons.track_changes, color: const Color.fromARGB(255, 41, 37, 37),),
+                    leading: Icon(
+                      Icons.track_changes,
+                      color: const Color.fromARGB(255, 41, 37, 37),
+                    ),
                     title: Text(
                       "MANAGEMENT TRACKER",
-                      style: TextStyle(
-                        letterSpacing: 1.5
-                      ),
-                    
-                    )
-                                
+                      style: TextStyle(letterSpacing: 1.5),
+                    ),
                   ),
                 ),
 
-                SizedBox(
-                  height: 10,
-                ),
+                SizedBox(height: 10),
 
                 Divider(
                   indent: 20,
@@ -64,47 +60,39 @@ class _HomePageState extends State<HomePage> {
                   color: const Color.fromARGB(255, 41, 37, 37),
                 ),
 
-                SizedBox(
-                  height: 20,
-                ),
+                SizedBox(height: 20),
 
                 Expanded(
                   child: Column(
                     children: [
                       MenuItemsWidget(
-                        icon: Icons.home, 
-                        text: "Dashoard", 
-                        pressed: () => {
-                          viewModel.updatePage(0)
-                        }, 
+                        icon: Icons.home,
+                        text: "Dashoard",
+                        pressed: () => {viewModel.updatePage(0)},
                       ),
 
                       MenuItemsWidget(
-                        icon: Icons.calendar_month, 
-                        text: "Calendar", 
-                        pressed: () => {
-                          viewModel.updatePage(1)
-                        }, 
+                        icon: Icons.calendar_month,
+                        text: "Calendar",
+                        pressed: () => {viewModel.updatePage(1)},
                       ),
 
                       MenuItemsWidget(
-                        icon: Icons.archive, 
-                        text: "Archive", 
-                        pressed: () => {
-                          viewModel.updatePage(3)
-                        }
+                        icon: Icons.archive,
+                        text: "Archive",
+                        pressed: () => {viewModel.updatePage(3)},
                       ),
 
                       const Spacer(),
 
                       Padding(
-                        padding: EdgeInsets.only(bottom: SpacingUtils.heightSpacing(context, 0.024)),
+                        padding: EdgeInsets.only(
+                          bottom: SpacingUtils.heightSpacing(context, 0.024),
+                        ),
                         child: MenuItemsWidget(
-                          icon: Icons.account_circle, 
-                          text: "Account", 
-                          pressed: () => {
-                            viewModel.updatePage(2)
-                          }, 
+                          icon: Icons.account_circle,
+                          text: "Account",
+                          pressed: () => {viewModel.updatePage(2)},
                         ),
                       ),
                     ],
@@ -113,20 +101,17 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-           
+
           Expanded(
             child: Container(
               width: double.infinity,
               height: double.infinity,
               color: const Color.fromARGB(255, 250, 250, 250),
-              child: Center(
-                child: _pages[viewModel.index]
-              ),
+              child: Center(child: _pages[viewModel.index]),
             ),
-          )
+          ),
         ],
-      )
-    );  
+      ),
+    );
   }
 }
-
