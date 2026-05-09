@@ -40,7 +40,7 @@ class _UserCesDisplayWidgetState extends State<UserCesDisplayWidget> {
           context.read<DashboardViewModel>().leaveActivity(widget.user['uid'], widget.activity['uid'], widget.user['active_participating_ces_activities']);
         },
         height: SizeUtils.height(context, 0.045),
-        backGroundColor: const Color.fromARGB(255, 228, 81, 81),
+        backGroundColor: Color.fromARGB(255, 214, 173, 170),
         child: Text(
           "Leave",
           style: TextStyle(

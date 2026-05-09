@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/utils/size_utils.dart';
 import 'package:frontend/utils/spacing_utils.dart';
 import 'package:frontend/viewmodel/dashboard_view_model.dart';
+import 'package:frontend/widgets/Indicator.dart';
 import 'package:frontend/widgets/action_card.dart';
 import 'package:frontend/widgets/ces_display_widget.dart';
 import 'package:frontend/widgets/user_ces_display_widget.dart';
@@ -135,6 +136,46 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
               ],
             ),
+            SizedBox(height: 35,),
+            Row(
+              children: [
+                ActionCard(
+                  width: SizeUtils.width(context, 0.3), 
+                  height: SizeUtils.height(context, 0.4),
+                  borderRadiusVal: 30,
+                  content: Stack(
+                    children: [
+                      Center(
+                        child: ProgBarIndicWidg(
+                          progress: ((widget.user['ces_points'] / 60) * 100),
+                          width: SizeUtils.height(context, 0.37), 
+                          height: SizeUtils.height(context, 0.37)
+                        ),
+                      ),
+
+                      Center(
+                        child: Text(
+                          "${(widget.user['ces_points']).round()}/60",
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold
+                          )
+                        ),
+                      )
+                    ],
+                  ),
+                  boxShadows: [
+                    BoxShadow(
+                      color: const Color.fromARGB(170, 200, 200, 200),
+                      spreadRadius: 0,
+                      blurRadius: 1,
+                      offset: const Offset(0, 1),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+
           ],
         ),
       ),
