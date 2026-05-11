@@ -46,7 +46,7 @@ class _DashboardPageState extends State<DashboardPage> {
               children: [
                 ActionCard(
                   width: SizeUtils.width(context, 0.379),
-                  height: SizeUtils.height(context, 0.3),
+                  height: SizeUtils.height(context, 0.5),
                   content: Column(
                     children: [
                       Container(
@@ -91,7 +91,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
                 ActionCard(
                   width: SizeUtils.width(context, 0.379),
-                  height: SizeUtils.height(context, 0.3),
+                  height: SizeUtils.height(context, 0.5),
                   content: Column(
                     children: [
                       Container(
@@ -141,15 +141,15 @@ class _DashboardPageState extends State<DashboardPage> {
               children: [
                 ActionCard(
                   width: SizeUtils.width(context, 0.3), 
-                  height: SizeUtils.height(context, 0.4),
+                  height: SizeUtils.height(context, 0.3),
                   borderRadiusVal: 30,
                   content: Stack(
                     children: [
                       Center(
                         child: ProgBarIndicWidg(
                           progress: ((widget.user['ces_points'] / 60) * 100),
-                          width: SizeUtils.height(context, 0.37), 
-                          height: SizeUtils.height(context, 0.37)
+                          width: SizeUtils.height(context, 0.27), 
+                          height: SizeUtils.height(context, 0.27)
                         ),
                       ),
 

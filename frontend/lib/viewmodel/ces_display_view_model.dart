@@ -16,7 +16,7 @@ class CesDisplayViewModel extends ChangeNotifier {
         notifyListeners(); 
       }
     } catch (e) {
-      print("Fetch error: $e");
+      debugPrint("Fetch error: $e");
     }
   }
 

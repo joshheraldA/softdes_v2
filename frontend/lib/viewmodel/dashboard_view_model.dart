@@ -30,7 +30,7 @@ class DashboardViewModel extends ChangeNotifier {
         }
       }
     } catch (e) {
-      print("Error fetching activities: $e");
+      debugPrint("Error fetching activities: $e");
     } finally {
       notifyListeners();
     }
@@ -50,7 +50,7 @@ class DashboardViewModel extends ChangeNotifier {
       );
 
       if (response.statusCode == 200) {
-        print("Join successful, refreshing list...");
+        debugPrint("Join successful, refreshing list...");
         // This 'await' now works because getActivities returns a Future
         await getActivities(); 
 
@@ -62,10 +62,10 @@ class DashboardViewModel extends ChangeNotifier {
         
         await joinedActivities(uids);
       } else {
-        print("Join failed with status: ${response.statusCode}");
+        debugPrint("Join failed with status: ${response.statusCode}");
       }
     } catch (e) {
-      print("Error joining: $e");
+      debugPrint("Error joining: $e");
     }
   }
 

@@ -20,16 +20,12 @@ class _CesDisplayWidgetState extends State<CesDisplayWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // Watch the specific display view model for colors/categories
     final cesVm = context.watch<CesDisplayViewModel>();
-    // Watch the dashboard view model to check live status of joined activities
     final dashVm = context.watch<DashboardViewModel>();
 
-    // 1. Logic: Determine if user is already in this activity
-    // Checking against the local activity's volunteer list
+
     final bool isJoined = widget.activity['volunteers'].contains(widget.user['uid']);
     
-    // 2. Factory: Get the correct button configuration
     final buttonConfig = ButtonManager.checkButton(isJoined ? "Leave" : "Join");
 
     return Row(
