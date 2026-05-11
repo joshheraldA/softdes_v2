@@ -30,6 +30,7 @@ class _ArchivePageState extends State<ArchivePage> {
       padding: const EdgeInsets.all(20.0),
       child: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          childAspectRatio: 1.8,
           crossAxisCount: 3
         ), 
         itemCount: viewModel.box.length,

@@ -16,6 +16,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => DashboardViewModel()),
         ChangeNotifierProvider(create: (_) => CesDisplayViewModel()),
         ChangeNotifierProvider(create: (_) => ArchiveViewModel()),
+        // add other viewmodels here
       ],
       child: const MyApp(),
     ),

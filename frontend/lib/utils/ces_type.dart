@@ -16,21 +16,21 @@ class Educational extends CesType {
   @override
   Color color = const Color.fromARGB(255, 141, 183, 218);
   @override
-  String type = "Donational";
+  String type = "Educational";
 }
 
 class Outreach extends CesType {
   @override
   Color color = Color.fromARGB(255, 255, 220, 168);
   @override
-  String type = "Donational";
+  String type = "Outreach";
 }
 
 class Default extends CesType {
   @override
   Color color = const Color.fromARGB(255, 250, 169, 163);
   @override
-  String type = "Donational";
+  String type = "Default";
 }
 
 

@@ -39,9 +39,20 @@ class _CesArchiveWidgetState extends State<CesArchiveWidget> {
             Align( 
               alignment: Alignment.topRight,
               child: Container(
-                width: 30,
-                height: 40,
-                color: designConfig.color
+                width: 90,
+                height: 20,
+                decoration: BoxDecoration(
+                  color: designConfig.color,
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                ),
+                child: Center(
+                  child: Text(
+                    designConfig.type,
+                    style: TextStyle(
+                      color: Colors.white
+                    )
+                  )
+                )
               )
             )
           ],

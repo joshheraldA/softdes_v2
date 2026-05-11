@@ -30,6 +30,7 @@ late List<Widget> _pages;
     // 2. Now you can safely access 'widget'
     _pages = [
       DashboardPage(user: widget.user), // No 'const' here because widget.user is dynamic
+      
       const CalendarPage(),
       const AccountPage(),
       const ArchivePage(),
@@ -114,6 +115,7 @@ late List<Widget> _pages;
               ],
             ),
           ),
+
           Expanded(
             child: Container(
               width: double.infinity,
