@@ -21,6 +21,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+<<<<<<< HEAD
 
 late List<Widget> _pages;
 
@@ -35,6 +36,14 @@ late List<Widget> _pages;
       const ArchivePage(),
     ];
   }
+=======
+  final List<Widget> _pages = [
+    const DashboardPage(),
+    const CalendarPage(),
+    const AccountPage(),
+    const ArchivePage(),
+  ];
+>>>>>>> Calendarpage
 
   @override
   Widget build(BuildContext context) {
@@ -114,6 +123,10 @@ late List<Widget> _pages;
               ],
             ),
           ),
+<<<<<<< HEAD
+=======
+
+>>>>>>> Calendarpage
           Expanded(
             child: Container(
               width: double.infinity,
