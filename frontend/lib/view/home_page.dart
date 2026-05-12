@@ -33,7 +33,7 @@ late List<Widget> _pages;
       
       const CalendarPage(),
       const AccountPage(),
-      const ArchivePage(),
+      ArchivePage(user: widget.user,),
     ];
   }
 

@@ -5,7 +5,12 @@ import 'package:frontend/widgets/ces_archive_widget.dart';
 import 'package:provider/provider.dart';
 
 class ArchivePage extends StatefulWidget {
-  const ArchivePage({super.key});
+  final Map<String, dynamic> user;
+  
+  const ArchivePage({
+    super.key,
+    required this.user
+  });
 
   @override
   State<ArchivePage> createState() => _ArchivePageState();
@@ -38,7 +43,10 @@ class _ArchivePageState extends State<ArchivePage> {
         itemBuilder: (context, index) { 
           final cesInfo = viewModel.box[index];
 
-          return CesArchiveWidget(infoActivity: cesInfo);
+          return CesArchiveWidget(
+            infoActivity: cesInfo,
+            user: widget.user, // <--- YOU MUST ADD THIS LINE
+          );
 
         }
       )
