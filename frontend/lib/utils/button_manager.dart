@@ -41,7 +41,7 @@ class DefaultButton extends ButtonClass {
 
   @override
   void clicked(DashboardViewModel vm, String uid, String activityUid, List<dynamic> userActivities) {
-    vm.getActivities();
+    vm.getActivities(userActivities);
   }
 }
 

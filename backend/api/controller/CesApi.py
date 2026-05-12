@@ -12,20 +12,10 @@ class CesApi:
     @staticmethod
     @api_view(['POST'])
     def post_ces(request):
-        """
-        Creates a CES activity
-
-        Args:
-            request: the necessary input information needed to create a ces activity
-
-        Returns:
-            Response: what the user will receive and the information that will be utilized 
-        """
         data = request.data
 
         profanity_handler = CheckProfanityHandler()
         if profanity_handler.handle(data['title']) is True:
-            # if there's no profanity
 
             uid = IdFactory.create_numeric_id(20)
 
@@ -48,7 +38,8 @@ class CesApi:
                 "uid": str(uid),
                 "type": {
                     "isStrenuous": data['isStrenuous'],
-                    "isOffCampus": data['isOffCampus']
+                    "isOffCampus": data['isOffCampus'],
+                    "type": data.get("type", "Default"),  # fixed — now stored
                 }
             }
 
@@ -60,12 +51,11 @@ class CesApi:
                 "activity": activity_data
             }, status=status.HTTP_201_CREATED)
 
-
         return Response({
             "status": False,
             "message": "There is profanity"
         }, status=status.HTTP_400_BAD_REQUEST)
-    
+
     @staticmethod
     @api_view(['GET'])
     def get_ces(request): 
@@ -76,13 +66,11 @@ class CesApi:
         for activity in activities:
             activity_data = activity.to_dict()
             activity_list.append(activity_data)
-            
 
         return Response({
             'status': True,
             'data': activity_list
         })
-
 
     @staticmethod
     @api_view(['GET'])
@@ -90,13 +78,10 @@ class CesApi:
         info_list = []
 
         doc_ref = db.collection('CESArchive')
-
         activity_list = doc_ref.get()
-
 
         for activity in activity_list:
             data = activity.to_dict()
-
             date_data = data['date']
             
             month = date_data.get('month', '')
@@ -109,20 +94,17 @@ class CesApi:
                 "date": f"{month} {day}, {year}".strip()    
             })
 
-        
         return Response({
             'status': True,
             'data': info_list
         }, status=status.HTTP_200_OK)
-    
 
     @staticmethod
     @api_view(['POST'])
     def participate_ces_activity(request):
-           
         data = request.data
         ces_ref = db.collection("CESArchive").document(data["ces_uid"])
-        ces_snapshot = ces_ref.get()  # using .get to check if it exists
+        ces_snapshot = ces_ref.get()
 
         user_ref = db.collection("users")
         query = list(user_ref.where("uid", "==", data["uid"]).stream())
@@ -134,7 +116,7 @@ class CesApi:
                     "active_participating_ces_activities": ArrayUnion([data["ces_uid"]])
                 })
 
-                ces_ref.update({  # updating using the reference document
+                ces_ref.update({
                     "volunteers": ArrayUnion([data["uid"]])
                 })
 
@@ -152,9 +134,7 @@ class CesApi:
             "status": False,
             "message": "CES Activity not found"
         }, status=status.HTTP_404_NOT_FOUND)
-        
 
-        
     @staticmethod
     @api_view(['GET'])
     def find_activity(request):
@@ -162,7 +142,6 @@ class CesApi:
 
         ces_ref = db.collection("CESArchive").document(uid)
         ces_snapshot = ces_ref.get()
-
 
         if ces_snapshot.exists:
             ces_data = ces_snapshot.to_dict()
@@ -177,7 +156,6 @@ class CesApi:
                 'status': False,
                 'message': "Could not find activity"
             }, status=status.HTTP_404_NOT_FOUND)
-        
 
     @staticmethod
     @api_view(['POST'])
@@ -214,6 +192,3 @@ class CesApi:
             "status": False,
             "message": "CES Activity not found"
         }, status=status.HTTP_404_NOT_FOUND)
-
-
-

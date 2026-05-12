@@ -3,6 +3,7 @@ import 'package:frontend/utils/spacing_utils.dart';
 import 'package:frontend/view/account_page.dart';
 import 'package:frontend/view/archive_page.dart';
 import 'package:frontend/view/calendar_page.dart';
+import 'package:frontend/view/create_activity_page.dart';
 import 'package:frontend/view/dashboard_page.dart';
 import 'package:frontend/viewmodel/dashboard_view_model.dart';
 import 'package:frontend/widgets/menu_items_widget.dart';
@@ -29,11 +30,11 @@ late List<Widget> _pages;
     super.initState();
     // 2. Now you can safely access 'widget'
     _pages = [
-      DashboardPage(user: widget.user), // No 'const' here because widget.user is dynamic
-      
+      DashboardPage(user: widget.user),
       const CalendarPage(),
       const AccountPage(),
       ArchivePage(user: widget.user,),
+      CreateActivityPage(user: widget.user),
     ];
   }
 
@@ -95,6 +96,12 @@ late List<Widget> _pages;
                         icon: Icons.archive,
                         text: "Archive",
                         pressed: () => {viewModel.updatePage(3)},
+                      ),
+
+                      MenuItemsWidget(
+                        icon: Icons.add_circle_outline,
+                        text: "Create Activity",
+                        pressed: () => {viewModel.updatePage(4)},
                       ),
 
                       const Spacer(),

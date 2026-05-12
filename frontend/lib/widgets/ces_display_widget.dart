@@ -18,52 +18,87 @@ class CesDisplayWidget extends StatefulWidget {
 
 class _CesDisplayWidgetState extends State<CesDisplayWidget> {
 
+  String get _activityType {
+    final typeField = widget.activity['type'];
+    if (typeField is Map) {
+      return (typeField['type'] as String?) ?? 'Default';
+    }
+    return (typeField as String?) ?? 'Default';
+  }
+
   @override
   Widget build(BuildContext context) {
     final cesVm = context.watch<CesDisplayViewModel>();
     final dashVm = context.watch<DashboardViewModel>();
 
-
     final bool isJoined = widget.activity['volunteers'].contains(widget.user['uid']);
-    
     final buttonConfig = ButtonManager.checkButton(isJoined ? "Leave" : "Join");
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text("${widget.activity['title']}"),
-        Container(
-          width: 90,
-          height: 23,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: cesVm.getCategoryColor(widget.activity['type']['type']),
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Text("${widget.activity['type']['type']}"),
-        ),
-        Text("${widget.activity['volunteers'].length}/40"),
-        
-        RoundedButton(
-          onPressed: () {
-            buttonConfig.clicked(
-              dashVm, 
-              widget.user['uid'], 
-              widget.activity['uid'], 
-              widget.user['active_participating_ces_activities']
-            );
-          },
-          height: SizeUtils.height(context, 0.045),
-          backGroundColor: buttonConfig.color, // Controlled by Factory
-          child: Text(
-            buttonConfig.text, // Controlled by Factory
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        children: [
+          // Col 1 — Title (flex 4)
+          Expanded(
+            flex: 4,
+            child: Text(
+              "${widget.activity['title']}",
+              overflow: TextOverflow.ellipsis,
             ),
           ),
-        )
-      ],
+
+          // Col 2 — Type badge (flex 3)
+          Expanded(
+            flex: 3,
+            child: Center(
+              child: Container(
+                height: 23,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: cesVm.getCategoryColor(_activityType),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Text(
+                  _activityType,
+                  style: const TextStyle(fontSize: 12),
+                ),
+              ),
+            ),
+          ),
+
+          // Col 3 — Volunteers count (flex 3)
+          Expanded(
+            flex: 3,
+            child: Center(
+              child: Text("${widget.activity['volunteers'].length}/40"),
+            ),
+          ),
+
+          // Col 4 — Join/Leave button (flex 2)
+          Expanded(
+            flex: 2,
+            child: RoundedButton(
+              onPressed: () {
+                buttonConfig.clicked(
+                  dashVm,
+                  widget.user['uid'],
+                  widget.activity['uid'],
+                  widget.user['active_participating_ces_activities'],
+                );
+              },
+              height: SizeUtils.height(context, 0.045),
+              backGroundColor: buttonConfig.color,
+              child: Text(
+                buttonConfig.text,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

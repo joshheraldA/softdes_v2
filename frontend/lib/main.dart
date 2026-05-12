@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/view/login_page.dart';
 import 'package:frontend/viewmodel/archive_view_model.dart';
 import 'package:frontend/viewmodel/ces_display_view_model.dart';
+import 'package:frontend/viewmodel/create_activity_view_model.dart';
 import 'package:frontend/viewmodel/dashboard_view_model.dart';
 import 'package:frontend/viewmodel/login_page_view_model.dart';
 import 'package:frontend/viewmodel/registration_view_model.dart';
@@ -16,6 +17,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => DashboardViewModel()),
         ChangeNotifierProvider(create: (_) => CesDisplayViewModel()),
         ChangeNotifierProvider(create: (_) => ArchiveViewModel()),
+        ChangeNotifierProvider(create: (_) => CreateActivityViewModel()),
         // add other viewmodels here
       ],
       child: const MyApp(),

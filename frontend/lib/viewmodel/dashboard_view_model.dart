@@ -16,8 +16,7 @@ class DashboardViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // FIXED: Changed from 'void' to 'Future<void>'
-  Future<void> getActivities() async {
+  Future<void> getActivities(List<dynamic> uids) async {
     try {
       final url = "http://127.0.0.1:8000/api/v1/get-ces/";
       final response = await http.get(Uri.parse(url));
@@ -26,7 +25,11 @@ class DashboardViewModel extends ChangeNotifier {
         final Map<String, dynamic> responseData = jsonDecode(response.body);
 
         if (responseData['status'] == true) {
-          _box = responseData['data'];
+          List<dynamic> incomingData = responseData['data'];
+
+          _box = incomingData.where((activity) {
+            return !uids.contains(activity['uid']); 
+          }).toList();
         }
       }
     } catch (e) {
@@ -52,7 +55,7 @@ class DashboardViewModel extends ChangeNotifier {
       if (response.statusCode == 200) {
         debugPrint("Join successful, refreshing list...");
         // This 'await' now works because getActivities returns a Future
-        await getActivities(); 
+        await getActivities(uids); 
 
         if (!uids.contains(cesUid)) {
           uids.add(cesUid);
@@ -107,7 +110,7 @@ class DashboardViewModel extends ChangeNotifier {
       );
 
       if (response.statusCode == 200) {
-        await getActivities();
+        await getActivities(uids);
 
         uids.remove(cesUid); // opposite of uids.add(cesUid) in joinActivity
 
