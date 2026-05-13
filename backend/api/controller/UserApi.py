@@ -16,6 +16,9 @@ from api.middleware.CredentialsHandler import CheckProfanityHandler, CheckSchool
 from firebase_admin import auth, firestore
 import requests
 
+import random
+from django.core.cache import cache #
+
 from api.firebase import db
 
 class UserApi:
@@ -66,46 +69,55 @@ class UserApi:
                 "status": False,
                 "message": result},
                 status=status.HTTP_400_BAD_REQUEST)
-        
+            
     @staticmethod
     @api_view(['POST'])
     def login_user(request):
+        import random  # Added for OTP generation
         data = request.data
-        email = request.GET.get('email')
+        email = data.get('email') 
+        password = data.get('password')
+
+        if not email or not password:
+            return Response({"status": False, "error": "Email and password required"}, status=400)
+
         try: 
+            # 1. Authenticate with Firebase (Validates the password)
             response = requests.post(
-            f"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBBVORwC933IYYmIOL7Sa56xISlhN4Pr90",
-            json={
-                "email": email,
-                "password": data["password"],
-                "returnSecureToken": True
-                }
+                f"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBBVORwC933IYYmIOL7Sa56xISlhN4Pr90",
+                json={"email": email, "password": password, "returnSecureToken": True}
             )
             result = response.json()
 
+            # If password/email is wrong, Firebase returns an error
             if "error" in result:
-                return Response({
-                    "status": False,
-                    "error": "Invalid Credentials"
-                }, status = status.HTTP_400_BAD_REQUEST)
+                return Response({"status": False, "error": "Invalid Credentials"}, status=status.HTTP_401_UNAUTHORIZED)
 
+            # 2. If password is correct, fetch the user's data from Firestore
+            users_query = db.collection("users").where("email", "==", email).get()
+            if not users_query:
+                return Response({"status": False, "error": "User data not found"}, status=404)
 
-            users_query = db.collection("users").where("email","==",email).get()
+            user_data = users_query[0].to_dict()
 
-            user_data = users_query[0].to_dict() if users_query else {}
-
+            # 3. Generate the 6-digit OTP
+            # This is the "3.5" step that was missing
+            otp_code = str(random.randint(100000, 999999))
+            
+            cache.set(f"otp_{email}", otp_code, timeout=300)
+            
+            print(f"\n[2FA DEBUG] The OTP for {email} is: {otp_code}\n")
+            # 4. Final Success Response
             return Response({   
                 "status": True,
-                "message": "Successfully logged in!",
+                "message": "Password verified. OTP generated!",
                 "user": user_data,
-                "uid": result['localId']
+                "uid": result['localId'],
+                "otp": otp_code  # Flutter will now see this key again
             }, status=status.HTTP_200_OK)
+
         except Exception as e:
-            return Response({
-                "status": False,
-                "error": str(e)
-            },status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-            
+            return Response({"status": False, "error": str(e)}, status=500)
 
     @staticmethod
     @api_view(['GET'])

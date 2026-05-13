@@ -24,13 +24,14 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   void initState() {
     super.initState();
-  
+    
     final viewModel = context.read<DashboardViewModel>();
-    viewModel.getActivities(widget.user['active_participating_ces_activities']);
 
-    viewModel.joinedActivities(widget.user['active_participating_ces_activities']);
+    final List<dynamic> activities = widget.user['active_participating_ces_activities'] ?? [];
+
+    viewModel.getActivities(activities);
+    viewModel.joinedActivities(activities);
   }
-
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<DashboardViewModel>();
@@ -156,7 +157,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     children: [
                       Center(
                         child: ProgBarIndicWidg(
-                          progress: ((widget.user['ces_points'] / 60) * 100),
+                          progress: (((widget.user['ces_points'] ?? 0).toDouble() / 60) * 100),
                           width: SizeUtils.height(context, 0.27), 
                           height: SizeUtils.height(context, 0.27)
                         ),
@@ -164,7 +165,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
                       Center(
                         child: Text(
-                          "${(widget.user['ces_points']).round()}/60",
+                          "${(widget.user['ces_points'] ?? 0).round()}/60",
                           style: TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.bold
