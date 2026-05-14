@@ -3,6 +3,7 @@ from django.urls import path
 # from .views import add_user_view
 from api.controller.UserApi import UserApi  
 from api.controller.CesApi import CesApi
+from api.controller.CesApiApproval import CesApiApproval
 from api import views
 
 urlpatterns = [
@@ -18,4 +19,5 @@ urlpatterns = [
     path("add-participant/", CesApi.participate_ces_activity, name="participatecesactivity"),
     path("find-activity/", CesApi.find_activity, name='findactivity'),
     path("leave-activity/", CesApi.leave_ces_activity, name='leaveactivity'),
+    path("get-ces-filter/", CesApiApproval.get_ces_status_filter, name="getcesstatusfilter"),
 ]

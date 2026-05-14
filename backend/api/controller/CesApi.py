@@ -19,7 +19,7 @@ class CesApi:
 
             uid = IdFactory.create_numeric_id(20)
 
-            doc_ref = db.collection("CESArchive").document(str(uid))
+            doc_ref = db.collection("CESArchive").document(str(uid)) 
 
             activity_data = {
                 "title": data["title"],
@@ -40,7 +40,8 @@ class CesApi:
                     "isStrenuous": data['isStrenuous'],
                     "isOffCampus": data['isOffCampus'],
                     "type": data.get("type", "Default"),  # fixed — now stored
-                }
+                },
+                "approval_status" : "pending", # added pending status
             }
 
             doc_ref.set(activity_data)

@@ -44,7 +44,8 @@ class UserApi:
                     "uid": user.uid,
                     "ces_points": 0,
                     "department": "Computer Engineering",
-                    "active_participating_ces_activities" : []
+                    "active_participating_ces_activities" : [],
+                    "role" : "student" #admin, moderator or student
                     })
                 user_doc = db.collection("users").document(user.uid).get()
 

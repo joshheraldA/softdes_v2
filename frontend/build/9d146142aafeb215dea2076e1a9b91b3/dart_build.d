@@ -1,0 +1,1 @@
+ /Users/twsty/Documents/flutter/softdes_v2/frontend/build/9d146142aafeb215dea2076e1a9b91b3/dart_build_result.json:  /Users/twsty/Documents/flutter/softdes_v2/frontend/.dart_tool/package_config.json /Users/twsty/Documents/flutter/softdes_v2/frontend/pubspec.yaml /Users/twsty/development/flutter/bin/cache/dart-sdk/version
