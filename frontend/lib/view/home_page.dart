@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/utils/spacing_utils.dart';
 import 'package:frontend/view/account_page.dart';
+import 'package:frontend/view/admin_activity_page.dart';
 import 'package:frontend/view/archive_page.dart';
 import 'package:frontend/view/calendar_page.dart';
 import 'package:frontend/view/create_activity_page.dart';
@@ -35,6 +36,7 @@ late List<Widget> _pages;
       const AccountPage(),
       ArchivePage(user: widget.user,),
       CreateActivityPage(user: widget.user),
+      AdminActivityPage(),
     ];
   }
 
@@ -102,6 +104,12 @@ late List<Widget> _pages;
                         icon: Icons.add_circle_outline,
                         text: "Create Activity",
                         pressed: () => {viewModel.updatePage(4)},
+                      ),
+
+                      MenuItemsWidget(
+                        icon: Icons.add_circle_outline,
+                        text: "Activity Approval",
+                        pressed: () => {viewModel.updatePage(5)},
                       ),
 
                       const Spacer(),

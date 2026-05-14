@@ -14,7 +14,7 @@ class CesApiApproval:
         status = request.query_params.get('status')
 
         if status:
-            activities = db.collection("CESArchive").where("approval_status", "==", status).get()
+            activities = db.collection("CESArchive").where("approval_status", "==", status).get() # this can be pending, approved, denied
         else:
             activities = db.collection("CESArchive").get()
 
