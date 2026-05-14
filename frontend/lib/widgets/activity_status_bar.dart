@@ -38,7 +38,7 @@ class ActivityStatusBar extends StatelessWidget {
         segments: const [
           ButtonSegment(value: 'pending', label: Text('Pending')),
           ButtonSegment(value: 'approved', label: Text('Approved')),
-          ButtonSegment(value: 'rejected', label: Text('Rejected')),
+          ButtonSegment(value: 'denied', label: Text('Rejected')),
         ],
         selected: viewModel.selected,
         onSelectionChanged: viewModel.setSelected,
