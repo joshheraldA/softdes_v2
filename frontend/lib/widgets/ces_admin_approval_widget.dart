@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/model/ces_activity_model.dart';
+import 'package:frontend/widgets/filtered_ces_list_tile.dart';
 
 class CesAdminApprovalWidget extends StatelessWidget {
   final List<CesActivity> activities;
@@ -12,11 +13,7 @@ class CesAdminApprovalWidget extends StatelessWidget {
       itemCount: activities.length,
       itemBuilder: (context, index) {
         final activity = activities[index];
-        return ListTile(
-          title: Text(activity.title),
-          subtitle: Text(activity.department),
-          trailing: Text(activity.approvalStatus),
-        );
+        return FilteredCesListTile(activity: activity);
       },
     );
   }
