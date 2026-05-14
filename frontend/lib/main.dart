@@ -7,6 +7,7 @@ import 'package:frontend/viewmodel/create_activity_view_model.dart';
 import 'package:frontend/viewmodel/dashboard_view_model.dart';
 import 'package:frontend/viewmodel/login_page_view_model.dart';
 import 'package:frontend/viewmodel/registration_view_model.dart';
+import 'package:frontend/viewmodel/student_searchbar_view_model.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -20,6 +21,8 @@ void main() {
         ChangeNotifierProvider(create: (_) => ArchiveViewModel()),
         ChangeNotifierProvider(create: (_) => CreateActivityViewModel()),
         ChangeNotifierProvider(create: (_) => AdminActivityPageViewModel()),
+        ChangeNotifierProvider(create: (_) => StudentSearchBarViewModel()),
+
 
         // add other viewmodels here
       ],

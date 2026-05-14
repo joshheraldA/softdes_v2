@@ -133,6 +133,24 @@ class UserApi:
         
         return Response(users[0].to_dict(), status=status.HTTP_200_OK)
     
+    @staticmethod
+    @api_view(['GET'])
+    def get_all_users(request):
+        users = db.collection("users").get()
+
+        if not users:
+            return Response({
+                "status": False,
+                "error": "No users found."
+            }, status=status.HTTP_404_NOT_FOUND)
+
+        user_list = [user.to_dict() for user in users]
+
+        return Response({
+            "status": True,
+            "data": user_list
+        }, status=status.HTTP_200_OK)
+        
 
 
 
@@ -185,8 +203,6 @@ class UserApiMiddleware:
 
             
 
-
-            
                 
 
         

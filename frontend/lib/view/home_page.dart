@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/utils/spacing_utils.dart';
 import 'package:frontend/view/account_page.dart';
 import 'package:frontend/view/admin_activity_page.dart';
+import 'package:frontend/view/admin_student_information.dart';
 import 'package:frontend/view/archive_page.dart';
 import 'package:frontend/view/calendar_page.dart';
 import 'package:frontend/view/create_activity_page.dart';
@@ -37,6 +38,7 @@ late List<Widget> _pages;
       ArchivePage(user: widget.user,),
       CreateActivityPage(user: widget.user),
       AdminActivityPage(),
+      AdminStudentInformation(),
     ];
   }
 
@@ -110,6 +112,11 @@ late List<Widget> _pages;
                         icon: Icons.add_circle_outline,
                         text: "Activity Approval",
                         pressed: () => {viewModel.updatePage(5)},
+                      ),
+                      MenuItemsWidget(
+                        icon: Icons.add_circle_outline,
+                        text: "Student Information",
+                        pressed: () => {viewModel.updatePage(6)},
                       ),
 
                       const Spacer(),
