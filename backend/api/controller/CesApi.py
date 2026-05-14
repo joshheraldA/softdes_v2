@@ -193,3 +193,35 @@ class CesApi:
             "status": False,
             "message": "CES Activity not found"
         }, status=status.HTTP_404_NOT_FOUND)
+    
+
+    @staticmethod
+    @api_view(['POST'])
+    def edit_ces_points(request):
+        data = request.data
+        uid = data.get('uid')
+        ces_points = data.get('ces_points')
+
+        if not uid or ces_points is None:
+            return Response({
+                'status': False,
+                'message': 'uid and ces_points are required'
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        user_ref = db.collection("users")
+        query = list(user_ref.where("uid", "==", uid).stream())
+
+        if not query:
+            return Response({
+                'status': False,
+                'message': 'User not found'
+            }, status=status.HTTP_404_NOT_FOUND)
+
+        query[0].reference.update({
+            'ces_points': int(ces_points)
+        })
+
+        return Response({
+            'status': True,
+            'message': 'CES points updated successfully'
+        }, status=status.HTTP_200_OK)

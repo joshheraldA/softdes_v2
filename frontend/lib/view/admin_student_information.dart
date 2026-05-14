@@ -13,7 +13,7 @@ class AdminStudentInformation extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      body: StudentSearchWidget(users: viewModel.users),
+      body: StudentSearchWidget(users: viewModel.users, viewModel: viewModel,),
     );
   }
 }
