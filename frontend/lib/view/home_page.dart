@@ -22,7 +22,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+<<<<<<< HEAD
   late List<Widget> _pages;
+=======
+<<<<<<< HEAD
+
+late List<Widget> _pages;
+>>>>>>> accPage
 
   @override
   void initState() {
@@ -38,6 +44,17 @@ class _HomePageState extends State<HomePage> {
       AdminStudentInformation(),
     ];
   }
+<<<<<<< HEAD
+=======
+=======
+  final List<Widget> _pages = [
+    const DashboardPage(),
+    const CalendarPage(),
+    const AccountPage(),
+    const ArchivePage(),
+  ];
+>>>>>>> Calendarpage
+>>>>>>> accPage
 
   @override
   Widget build(BuildContext context) {
@@ -134,7 +151,14 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> Calendarpage
+>>>>>>> accPage
           Expanded(
             child: Container(
               width: double.infinity,
