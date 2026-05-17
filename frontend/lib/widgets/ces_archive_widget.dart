@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/model/user.dart';
 import 'package:frontend/utils/ces_type.dart';
 import 'package:frontend/utils/size_utils.dart';
 import 'package:frontend/viewmodel/dashboard_view_model.dart';
@@ -7,13 +8,9 @@ import 'package:provider/provider.dart';
 
 class CesArchiveWidget extends StatefulWidget {
   final dynamic infoActivity;
-  final Map<String, dynamic>? user; // Added user to get the ID
+  final User? user; // Added user to get the ID
 
-  const CesArchiveWidget({
-    super.key,
-    required this.infoActivity,
-    this.user,
-  });
+  const CesArchiveWidget({super.key, required this.infoActivity, this.user});
 
   @override
   State<CesArchiveWidget> createState() => _CesArchiveWidgetState();
@@ -23,14 +20,17 @@ class _CesArchiveWidgetState extends State<CesArchiveWidget> {
   @override
   Widget build(BuildContext context) {
     // Safely get design config from the activity type
-    final designConfig = CesManager.getType(widget.infoActivity['type']['type']);
+    final designConfig = CesManager.getType(
+      widget.infoActivity['type']['type'],
+    );
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 243, 240, 240),
         borderRadius: const BorderRadius.all(Radius.circular(10)),
-        border: Border.all( // Changed from BoxBorder.all
+        border: Border.all(
+          // Changed from BoxBorder.all
           color: Colors.grey,
           width: 1,
         ),
@@ -45,7 +45,7 @@ class _CesArchiveWidgetState extends State<CesArchiveWidget> {
             Positioned(
               left: 0,
               top: 0,
-              right: 100, 
+              right: 100,
               child: Text(
                 widget.infoActivity['title'] ?? 'No Title',
                 style: const TextStyle(fontWeight: FontWeight.bold),
@@ -53,10 +53,7 @@ class _CesArchiveWidgetState extends State<CesArchiveWidget> {
             ),
 
             // The Type Badge
-            TypeIndicator(
-              color: designConfig.color, 
-              type: designConfig.type
-            ),
+            TypeIndicator(color: designConfig.color, type: designConfig.type),
 
             // Join Button
             Align(
@@ -71,14 +68,14 @@ class _CesArchiveWidgetState extends State<CesArchiveWidget> {
                   // 2. Activity ID (from the infoActivity map)
                   // 3. The Activity Data (passing the whole map)
                   context.read<DashboardViewModel>().joinActivity(
-                    widget.user!['uid'], 
-                    widget.infoActivity['uid'], 
-                    widget.user!['active_participating_ces_activities']
+                    widget.user!.uid,
+                    widget.infoActivity['uid'],
+                    widget.user!.cesParticipating,
                   );
                 },
                 child: const Text("Join"),
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -93,15 +90,11 @@ class TypeIndicator extends StatelessWidget {
   final Color color;
   final String type;
 
-  const TypeIndicator({
-    super.key,
-    required this.color,
-    required this.type 
-  });
+  const TypeIndicator({super.key, required this.color, required this.type});
 
   @override
   Widget build(BuildContext context) {
-    return Align( 
+    return Align(
       alignment: Alignment.topRight,
       child: Container(
         width: 90,
@@ -113,13 +106,10 @@ class TypeIndicator extends StatelessWidget {
         child: Center(
           child: Text(
             type,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 10,
-            )
-          )
-        )
-      )
+            style: const TextStyle(color: Colors.white, fontSize: 10),
+          ),
+        ),
+      ),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/model/user.dart';
 import 'package:frontend/utils/size_utils.dart';
 import 'package:frontend/viewmodel/ces_display_view_model.dart';
 import 'package:frontend/viewmodel/dashboard_view_model.dart';
@@ -7,16 +8,19 @@ import 'package:provider/provider.dart';
 
 class UserCesDisplayWidget extends StatefulWidget {
   final Map<String, dynamic> activity;
-  final Map<String, dynamic> user;
+  final User user;
 
-  const UserCesDisplayWidget({super.key, required this.activity, required this.user});
+  const UserCesDisplayWidget({
+    super.key,
+    required this.activity,
+    required this.user,
+  });
 
   @override
   State<UserCesDisplayWidget> createState() => _UserCesDisplayWidgetState();
 }
 
 class _UserCesDisplayWidgetState extends State<UserCesDisplayWidget> {
-
   String get _activityType {
     final typeField = widget.activity['type'];
     if (typeField is Map) {
@@ -75,9 +79,9 @@ class _UserCesDisplayWidgetState extends State<UserCesDisplayWidget> {
             child: RoundedButton(
               onPressed: () {
                 context.read<DashboardViewModel>().leaveActivity(
-                  widget.user['uid'],
+                  widget.user.uid,
                   widget.activity['uid'],
-                  widget.user['active_participating_ces_activities'],
+                  widget.user.cesParticipating,
                 );
               },
               height: SizeUtils.height(context, 0.045),

@@ -43,7 +43,7 @@ class _TwoFaPageState extends State<TwoFaPage> {
             ElevatedButton(
               onPressed: () async {
                 bool success = await viewModel.verifyOtp(
-                  widget.email, 
+                  widget.email,
                   _otpController.text,
                 );
 
@@ -51,7 +51,9 @@ class _TwoFaPageState extends State<TwoFaPage> {
                   // Navigate to Home if code is correct
                   Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(builder: (_) => HomePage(user: viewModel.user)),
+                    MaterialPageRoute(
+                      builder: (_) => HomePage(user: viewModel.user!),
+                    ),
                     (route) => false,
                   );
                 }

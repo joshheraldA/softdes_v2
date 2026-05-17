@@ -36,23 +36,76 @@ class CreateActivityViewModel extends ChangeNotifier {
   bool get isLoading => _uiStatus == CreateActivityStatus.loading;
 
   static const List<String> months = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December',
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
   ];
   static const List<String> statuses = ['Upcoming', 'Ongoing', 'Completed'];
   static const List<String> types = ['Educational', 'Donational', 'Outreach'];
 
-  void setTitle(String v)         { _title = v;         notifyListeners(); }
-  void setStatus(String v)        { _status = v;        notifyListeners(); }
-  void setDepartment(String v)    { _department = v;    notifyListeners(); }
-  void setBeneficiaries(String v) { _beneficiaries = v; notifyListeners(); }
-  void setMonth(String v)         { _month = v;         notifyListeners(); }
-  void setDay(String v)           { _day = v;           notifyListeners(); }
-  void setYear(String v)          { _year = v;          notifyListeners(); }
-  void setStrenuous(bool v)       { _isStrenuous = v;   notifyListeners(); }
-  void setOffCampus(bool v)       { _isOffCampus = v;   notifyListeners(); }
-  void setPrivate(bool v)         { _isPrivate = v;     notifyListeners(); }
-  void setType(String v)          { _type = v;          notifyListeners(); }
+  void setTitle(String v) {
+    _title = v;
+    notifyListeners();
+  }
+
+  void setStatus(String v) {
+    _status = v;
+    notifyListeners();
+  }
+
+  void setDepartment(String v) {
+    _department = v;
+    notifyListeners();
+  }
+
+  void setBeneficiaries(String v) {
+    _beneficiaries = v;
+    notifyListeners();
+  }
+
+  void setMonth(String v) {
+    _month = v;
+    notifyListeners();
+  }
+
+  void setDay(String v) {
+    _day = v;
+    notifyListeners();
+  }
+
+  void setYear(String v) {
+    _year = v;
+    notifyListeners();
+  }
+
+  void setStrenuous(bool v) {
+    _isStrenuous = v;
+    notifyListeners();
+  }
+
+  void setOffCampus(bool v) {
+    _isOffCampus = v;
+    notifyListeners();
+  }
+
+  void setPrivate(bool v) {
+    _isPrivate = v;
+    notifyListeners();
+  }
+
+  void setType(String v) {
+    _type = v;
+    notifyListeners();
+  }
 
   String? validate() {
     if (_title.trim().isEmpty) return 'Title is required.';
@@ -61,9 +114,11 @@ class CreateActivityViewModel extends ChangeNotifier {
     if (_day.trim().isEmpty) return 'Day is required.';
     if (_year.trim().isEmpty) return 'Year is required.';
     final dayInt = int.tryParse(_day);
-    if (dayInt == null || dayInt < 1 || dayInt > 31) return 'Day must be between 1 and 31.';
+    if (dayInt == null || dayInt < 1 || dayInt > 31)
+      return 'Day must be between 1 and 31.';
     final yearInt = int.tryParse(_year);
-    if (yearInt == null || yearInt < 2000 || yearInt > 2100) return 'Enter a valid year (e.g. 2025).';
+    if (yearInt == null || yearInt < 2000 || yearInt > 2100)
+      return 'Enter a valid year (e.g. 2025).';
     return null;
   }
 
@@ -98,7 +153,7 @@ class CreateActivityViewModel extends ChangeNotifier {
           'uid': facilitatorUid,
           'isStrenuous': _isStrenuous.toString(),
           'isOffCampus': _isOffCampus.toString(),
-          'type': _type,  // fixed — now sent to backend
+          'type': _type, // fixed — now sent to backend
         }),
       );
 
@@ -106,7 +161,8 @@ class CreateActivityViewModel extends ChangeNotifier {
 
       if (response.statusCode == 201 && data['status'] == true) {
         _uiStatus = CreateActivityStatus.success;
-        _message = data['message'] as String? ?? 'Activity created successfully!';
+        _message =
+            data['message'] as String? ?? 'Activity created successfully!';
         _resetForm();
       } else {
         _uiStatus = CreateActivityStatus.error;

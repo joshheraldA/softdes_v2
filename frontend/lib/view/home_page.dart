@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/model/user.dart';
 import 'package:frontend/utils/spacing_utils.dart';
 import 'package:frontend/view/account_page.dart';
 import 'package:frontend/view/archive_page.dart';
@@ -10,20 +11,16 @@ import 'package:frontend/widgets/menu_items_widget.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
-  final Map<String, dynamic> user;
+  final User user;
 
-  const HomePage({
-    super.key,
-    required this.user
-  });
+  const HomePage({super.key, required this.user});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-
-late List<Widget> _pages;
+  late List<Widget> _pages;
 
   @override
   void initState() {
@@ -33,7 +30,7 @@ late List<Widget> _pages;
       DashboardPage(user: widget.user),
       const CalendarPage(),
       const AccountPage(),
-      ArchivePage(user: widget.user,),
+      ArchivePage(user: widget.user),
       CreateActivityPage(user: widget.user),
     ];
   }

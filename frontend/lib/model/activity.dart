@@ -1,5 +1,3 @@
-/// Mirrors the CESArchive Firestore document returned by the Django API.
-/// This is a pure data class — no logic, no Flutter imports.
 class Activity {
   final String uid;
   final String title;
@@ -54,7 +52,7 @@ class Activity {
       year: date['year'] as String? ?? '',
       isStrenuous: (typeMap['isStrenuous'] as String?) == 'true',
       isOffCampus: (typeMap['isOffCampus'] as String?) == 'true',
-      type: typeMap['type'] as String? ?? 'Default',  // fixed
+      type: typeMap['type'] as String? ?? 'Default', // fixed
       volunteers: List<String>.from(json['volunteers'] as List? ?? []),
       facilitator: List<String>.from(json['facilitator'] as List? ?? []),
       documents: List<dynamic>.from(json['documents'] as List? ?? []),
@@ -64,9 +62,18 @@ class Activity {
   DateTime? get dateTime {
     try {
       const monthMap = {
-        'january': 1, 'february': 2, 'march': 3, 'april': 4,
-        'may': 5, 'june': 6, 'july': 7, 'august': 8,
-        'september': 9, 'october': 10, 'november': 11, 'december': 12,
+        'january': 1,
+        'february': 2,
+        'march': 3,
+        'april': 4,
+        'may': 5,
+        'june': 6,
+        'july': 7,
+        'august': 8,
+        'september': 9,
+        'october': 10,
+        'november': 11,
+        'december': 12,
       };
       final m = monthMap[month.toLowerCase()];
       final d = int.tryParse(day);

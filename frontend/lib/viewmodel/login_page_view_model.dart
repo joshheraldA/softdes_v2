@@ -1,83 +1,90 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:frontend/model/user.dart';
+import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class LoginPageViewModel extends ChangeNotifier {
+  User? _user;
+
   String _text = "";
   String _uid = "";
-  Map<String, dynamic> _user = {};
+
+  bool _awaiting2Fa = false;
   bool _loginStatus = false;
-  bool _awaitingTwoFa = false; // New flag for 2FA state
 
   String get text => _text;
+  User? get user => _user;
   String get uid => _uid;
+  bool get awaiting2Fa => _awaiting2Fa;
   bool get loginStatus => _loginStatus;
-  bool get awaitingTwoFa => _awaitingTwoFa;
-  Map<String, dynamic> get user => _user;
 
-  /// Step 1: Validate credentials and trigger 2FA email
   Future<void> updateText(String email, String password) async {
-    // Note: Removed query params from URL since you are sending data in the body
     final url = Uri.parse("http://127.0.0.1:8000/api/v1/login-user/");
 
     try {
+      // make the post request
       final response = await http.post(
         url,
         headers: {"Content-type": "application/json"},
-        body: jsonEncode({
-          "email": email,
-          "password": password,
-        }),
+        body: jsonEncode({"email": email, "password": password}),
       );
 
+      // Decode the data into something obtainable
       final Map<String, dynamic> data = jsonDecode(response.body);
 
-      if (data['status'] == true) {
-        _uid = data['uid'] ?? "";
-        _user = data['user'] ?? {};
-        _awaitingTwoFa = true; // Tell UI to move to 2FA screen
-        _text = ""; 
-      } else {
-        _text = "Failed: ${data['error']}";
-        _awaitingTwoFa = false;
+      // update the status and state of the page
+      if (data['status'] == 'true' || data['status'] == true) {
+        // checks if the user actually exists
+        if (data['user'] != null) {
+          _uid = data['uid'] ?? "";
+          _user = User.fromJson(data['user'] as Map<String, dynamic>);
+          _awaiting2Fa = true;
+          _text = "";
+        } else {
+          // returns the text if the user is not found
+          _text = data['error'] ?? "Invalid email or password.";
+          _awaiting2Fa = false;
+        }
       }
     } catch (e) {
-      _text = "Connection Failed: $e";
+      _text = "Error 500: Something went wrong $e";
+    } finally {
+      notifyListeners();
     }
-    notifyListeners();
   }
 
-
   Future<bool> verifyOtp(String email, String otp) async {
+    // parse the url into an actual endpoint
     final url = Uri.parse("http://127.0.0.1:8000/api/v1/verify-2fa/");
+
     try {
+      // make the http post request to validate the otp
       final response = await http.post(
         url,
         headers: {"Content-type": "application/json"},
-        body: jsonEncode({"email": email, "otp": otp}),
+        body: jsonEncode({"otp": otp, "email": email}),
       );
 
-      // If Django sends an error page, response.body will be HTML, not JSON.
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        if (data['status'] == true) {
-          _loginStatus = true;
-          _awaitingTwoFa = false;
-          notifyListeners();
-          return true;
-        } else {
-          _text = data['error'] ?? "Invalid Code";
-        }
+      // parse the data
+      final Map<String, dynamic> data = jsonDecode(response.body);
+
+      // check if the status is successfull
+      if (data['status'] == true || data['status'] == "true") {
+        _loginStatus = true;
+        _awaiting2Fa = false;
+        debugPrint("I MEAN IT WORKS");
+        notifyListeners();
+        return true;
       } else {
-        // This catches the HTML response shown in image_3c8f3b.png
-        _text = "Server Error: ${response.statusCode}. Check Django logs.";
+        _loginStatus = false;
+        final backendError =
+            data['message'] ?? data['error'] ?? "Incorrect verification code.";
+        _text = "Invalid Code: $backendError";
       }
     } catch (e) {
-      _text = "Verification Error: $e";
+      debugPrint("Error 500: Something went wrong with the error: $e");
     }
     notifyListeners();
     return false;
   }
 }
-
-

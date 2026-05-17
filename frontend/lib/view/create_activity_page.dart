@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/model/user.dart';
 import 'package:frontend/viewmodel/create_activity_view_model.dart';
 import 'package:frontend/widgets/rounded_button.dart';
 import 'package:frontend/widgets/rounded_text_field.dart';
 import 'package:provider/provider.dart';
 
 class CreateActivityPage extends StatefulWidget {
-  final Map<String, dynamic> user;
+  final User user;
 
   const CreateActivityPage({super.key, required this.user});
 
@@ -15,11 +16,11 @@ class CreateActivityPage extends StatefulWidget {
 
 class _CreateActivityPageState extends State<CreateActivityPage> {
   // Controllers for text fields
-  final _titleController       = TextEditingController();
-  final _departmentController  = TextEditingController();
+  final _titleController = TextEditingController();
+  final _departmentController = TextEditingController();
   final _beneficiariesController = TextEditingController();
-  final _dayController         = TextEditingController();
-  final _yearController        = TextEditingController();
+  final _dayController = TextEditingController();
+  final _yearController = TextEditingController();
 
   @override
   void dispose() {
@@ -68,7 +69,12 @@ class _CreateActivityPageState extends State<CreateActivityPage> {
               isExpanded: true,
               value: value,
               items: items
-                  .map((e) => DropdownMenuItem<T>(value: e, child: Text(e.toString())))
+                  .map(
+                    (e) => DropdownMenuItem<T>(
+                      value: e,
+                      child: Text(e.toString()),
+                    ),
+                  )
                   .toList(),
               onChanged: onChanged,
             ),
@@ -95,7 +101,9 @@ class _CreateActivityPageState extends State<CreateActivityPage> {
       ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
-        side: BorderSide(color: value ? Colors.green.shade300 : Colors.grey.shade300),
+        side: BorderSide(
+          color: value ? Colors.green.shade300 : Colors.grey.shade300,
+        ),
       ),
     );
   }
@@ -110,7 +118,7 @@ class _CreateActivityPageState extends State<CreateActivityPage> {
     vm.setDay(_dayController.text);
     vm.setYear(_yearController.text);
 
-    await vm.submitActivity(widget.user['uid'] as String? ?? '');
+    await vm.submitActivity(widget.user.uid as String? ?? '');
 
     if (!mounted) return;
 
@@ -207,7 +215,9 @@ class _CreateActivityPageState extends State<CreateActivityPage> {
                             label: 'STATUS *',
                             value: vm.status,
                             items: CreateActivityViewModel.statuses,
-                            onChanged: (v) { if (v != null) vm.setStatus(v); },
+                            onChanged: (v) {
+                              if (v != null) vm.setStatus(v);
+                            },
                           ),
                         ),
                       ],
@@ -239,7 +249,9 @@ class _CreateActivityPageState extends State<CreateActivityPage> {
                             label: 'ACTIVITY TYPE *',
                             value: vm.type,
                             items: CreateActivityViewModel.types,
-                            onChanged: (v) { if (v != null) vm.setType(v); },
+                            onChanged: (v) {
+                              if (v != null) vm.setType(v);
+                            },
                           ),
                         ),
                       ],
@@ -274,9 +286,16 @@ class _CreateActivityPageState extends State<CreateActivityPage> {
                                 isExpanded: true,
                                 value: vm.month,
                                 items: CreateActivityViewModel.months
-                                    .map((m) => DropdownMenuItem(value: m, child: Text(m)))
+                                    .map(
+                                      (m) => DropdownMenuItem(
+                                        value: m,
+                                        child: Text(m),
+                                      ),
+                                    )
                                     .toList(),
-                                onChanged: (v) { if (v != null) vm.setMonth(v); },
+                                onChanged: (v) {
+                                  if (v != null) vm.setMonth(v);
+                                },
                               ),
                             ),
                           ),
@@ -336,7 +355,9 @@ class _CreateActivityPageState extends State<CreateActivityPage> {
                     SizedBox(
                       width: double.infinity,
                       child: RoundedButton(
-                        onPressed: vm.isLoading ? () {} : () => _handleSubmit(context),
+                        onPressed: vm.isLoading
+                            ? () {}
+                            : () => _handleSubmit(context),
                         height: 50,
                         width: double.infinity,
                         borderVal: 6,
@@ -355,7 +376,10 @@ class _CreateActivityPageState extends State<CreateActivityPage> {
                               )
                             : const Text(
                                 'Create Activity',
-                                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 15,
+                                ),
                               ),
                       ),
                     ),

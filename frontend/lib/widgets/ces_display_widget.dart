@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/model/user.dart';
 import 'package:frontend/utils/button_manager.dart';
 import 'package:frontend/utils/size_utils.dart';
 import 'package:frontend/viewmodel/ces_display_view_model.dart';
@@ -8,16 +9,19 @@ import 'package:provider/provider.dart';
 
 class CesDisplayWidget extends StatefulWidget {
   final Map<String, dynamic> activity;
-  final Map<String, dynamic> user;
+  final User user;
 
-  const CesDisplayWidget({super.key, required this.activity, required this.user});
+  const CesDisplayWidget({
+    super.key,
+    required this.activity,
+    required this.user,
+  });
 
   @override
   State<CesDisplayWidget> createState() => _CesDisplayWidgetState();
 }
 
 class _CesDisplayWidgetState extends State<CesDisplayWidget> {
-
   String get _activityType {
     final typeField = widget.activity['type'];
     if (typeField is Map) {
@@ -31,7 +35,9 @@ class _CesDisplayWidgetState extends State<CesDisplayWidget> {
     final cesVm = context.watch<CesDisplayViewModel>();
     final dashVm = context.watch<DashboardViewModel>();
 
-    final bool isJoined = widget.activity['volunteers'].contains(widget.user['uid']);
+    final bool isJoined = widget.activity['volunteers'].contains(
+      widget.user.uid,
+    );
     final buttonConfig = ButtonManager.checkButton(isJoined ? "Leave" : "Join");
 
     return Padding(
@@ -81,9 +87,9 @@ class _CesDisplayWidgetState extends State<CesDisplayWidget> {
               onPressed: () {
                 buttonConfig.clicked(
                   dashVm,
-                  widget.user['uid'],
+                  widget.user.uid,
                   widget.activity['uid'],
-                  widget.user['active_participating_ces_activities'],
+                  widget.user.cesParticipating,
                 );
               },
               height: SizeUtils.height(context, 0.045),
