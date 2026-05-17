@@ -1,13 +1,14 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:frontend/view/home_page.dart';
+// import 'package:frontend/view/home_page.dart';
 import 'package:frontend/view/registration.dart';
 import 'package:frontend/viewmodel/login_page_view_model.dart';
 import 'package:frontend/viewmodel/registration_view_model.dart';
 import 'package:frontend/widgets/action_card.dart';
 import 'package:frontend/widgets/rounded_button.dart';
 import 'package:frontend/widgets/rounded_text_field.dart';
+import 'package:frontend/widgets/two_fa_page.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -169,21 +170,29 @@ class _LoginPageState extends State<LoginPage> {
                       Padding(
                         padding: const EdgeInsets.only(top: 20),
                         child: RoundedButton(
-                          onPressed: () => {
-                            viewModel.updateText(
+                          onPressed: () async {
+                            // 1. Trigger the backend to verify credentials and send the 2FA email
+                            await viewModel.updateText(
                               emailController.text,
                               passwordController.text,
-                            ),
-                            if (viewModel.loginStatus)
-                              {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        HomePage(user: viewModel.user),
-                                  ),
+                            );
+
+                            // 2. Check if the backend response set the 'awaitingTwoFa' flag to true
+                            if (viewModel.awaiting2Fa && mounted) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      ChangeNotifierProvider.value(
+                                        value:
+                                            viewModel, // Pass the existing viewModel to the next page
+                                        child: TwoFaPage(
+                                          email: emailController.text,
+                                        ),
+                                      ),
                                 ),
-                              },
+                              );
+                            }
                           },
                           width: MediaQuery.of(context).size.width * 0.25,
                           height: MediaQuery.of(context).size.height * 0.06,
@@ -194,7 +203,7 @@ class _LoginPageState extends State<LoginPage> {
                             136,
                           ),
                           colors: Colors.white,
-                          child: Text("Submit"),
+                          child: const Text("Submit"),
                         ),
                       ),
                     ],

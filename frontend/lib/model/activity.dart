@@ -1,5 +1,3 @@
-/// Mirrors the CESArchive Firestore document returned by the Django API.
-/// This is a pure data class — no logic, no Flutter imports.
 class Activity {
   final String uid;
   final String title;
@@ -8,13 +6,13 @@ class Activity {
   final String beneficiaries;
   final String private;
 
-  final String month; // e.g. "May"
-  final String day; // e.g. "24"
-  final String year; // e.g. "2006"
+  final String month;
+  final String day;
+  final String year;
 
   final bool isStrenuous;
   final bool isOffCampus;
-  final String type; // e.g. "Outreach"
+  final String type;
 
   final List<String> volunteers;
   final List<String> facilitator;
@@ -38,7 +36,6 @@ class Activity {
     required this.documents,
   });
 
-  /// Deserializes from the JSON the Django API returns in `get_ces`.
   factory Activity.fromJson(Map<String, dynamic> json) {
     final date = json['date'] as Map<String, dynamic>? ?? {};
     final typeMap = json['type'] as Map<String, dynamic>? ?? {};
@@ -55,15 +52,13 @@ class Activity {
       year: date['year'] as String? ?? '',
       isStrenuous: (typeMap['isStrenuous'] as String?) == 'true',
       isOffCampus: (typeMap['isOffCampus'] as String?) == 'true',
-      type: typeMap['type'] as String? ?? '',
+      type: typeMap['type'] as String? ?? 'Default', // fixed
       volunteers: List<String>.from(json['volunteers'] as List? ?? []),
       facilitator: List<String>.from(json['facilitator'] as List? ?? []),
       documents: List<dynamic>.from(json['documents'] as List? ?? []),
     );
   }
 
-  /// Converts the stored date strings into a [DateTime] for calendar placement.
-  /// Returns null if the date fields are missing or unparseable.
   DateTime? get dateTime {
     try {
       const monthMap = {

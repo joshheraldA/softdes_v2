@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/model/user.dart';
 import 'package:frontend/utils/size_utils.dart';
 import 'package:frontend/utils/spacing_utils.dart';
 import 'package:frontend/viewmodel/dashboard_view_model.dart';
@@ -9,12 +10,9 @@ import 'package:frontend/widgets/user_ces_display_widget.dart';
 import 'package:provider/provider.dart';
 
 class DashboardPage extends StatefulWidget {
-  final Map<String, dynamic> user;
+  final User user;
 
-  const DashboardPage({
-    super.key,
-    required this.user
-  });
+  const DashboardPage({super.key, required this.user});
 
   @override
   State<DashboardPage> createState() => _DashboardPageState();
@@ -24,11 +22,13 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   void initState() {
     super.initState();
-  
-    final viewModel = context.read<DashboardViewModel>();
-    viewModel.getActivities();
 
-    viewModel.joinedActivities(widget.user['active_participating_ces_activities'] );
+    final viewModel = context.read<DashboardViewModel>();
+
+    final List<dynamic> activities = widget.user.cesParticipating;
+
+    viewModel.getActivities(activities);
+    viewModel.joinedActivities(activities);
   }
 
   @override
@@ -46,32 +46,72 @@ class _DashboardPageState extends State<DashboardPage> {
               children: [
                 ActionCard(
                   width: SizeUtils.width(context, 0.379),
-                  height: SizeUtils.height(context, 0.3),
+                  height: SizeUtils.height(context, 0.5),
                   content: Column(
                     children: [
                       Container(
                         height: 30,
                         decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 245, 245, 245),
-                          borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10))
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10),
+                          ),
                         ),
-                        child: Row(children: [
-                          SizedBox(width: SpacingUtils.widthSpacing(context, 0.027)),
-                          Text("Title", style: TextStyle(fontWeight: FontWeight.bold),),
-                          SizedBox(width: SpacingUtils.widthSpacing(context, 0.105)),
-                          Text("Type", style: TextStyle(fontWeight: FontWeight.bold),),
-                          SizedBox(width: SpacingUtils.widthSpacing(context, 0.065),),
-                          Text("Volunteers", style: TextStyle(fontWeight: FontWeight.bold),)
-                        ],)
+                        // AFTER — same flex values as the row widgets: 4 / 3 / 3 / 2
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 4,
+                              child: Padding(
+                                padding: EdgeInsets.only(left: 8),
+                                child: Text(
+                                  "Title",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 3,
+                              child: Center(
+                                child: Text(
+                                  "Type",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 3,
+                              child: Center(
+                                child: Text(
+                                  "Volunteers",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 2,
+                              child: SizedBox(),
+                            ), // spacer for the button column
+                          ],
+                        ),
                       ),
+
                       Expanded(
                         child: ListView.builder(
                           itemCount: viewModel.boxes.length,
                           itemBuilder: (context, index) {
                             final activity = viewModel.boxes[index];
                             return Padding(
-                              padding: const EdgeInsets.only(top: 5, left: 20, right: 20),
-                              child: CesDisplayWidget(activity: activity, user: widget.user,),
+                              padding: const EdgeInsets.only(
+                                top: 5,
+                                left: 20,
+                                right: 20,
+                              ),
+                              child: CesDisplayWidget(
+                                activity: activity,
+                                user: widget.user,
+                              ),
                             );
                           },
                         ),
@@ -91,32 +131,60 @@ class _DashboardPageState extends State<DashboardPage> {
 
                 ActionCard(
                   width: SizeUtils.width(context, 0.379),
-                  height: SizeUtils.height(context, 0.3),
+                  height: SizeUtils.height(context, 0.5),
                   content: Column(
                     children: [
                       Container(
                         height: 30,
                         decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 245, 245, 245),
-                          borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10))
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10),
+                          ),
                         ),
-                        child: Row(children: [
-                          SizedBox(width: SpacingUtils.widthSpacing(context, 0.027)),
-                          Text("Title", style: TextStyle(fontWeight: FontWeight.bold),),
-                          SizedBox(width: SpacingUtils.widthSpacing(context, 0.105)),
-                          Text("Type", style: TextStyle(fontWeight: FontWeight.bold),),
-                          SizedBox(width: SpacingUtils.widthSpacing(context, 0.065),),
-                          Text("Volunteers", style: TextStyle(fontWeight: FontWeight.bold),)
-                        ],)
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: SpacingUtils.widthSpacing(context, 0.027),
+                            ),
+                            Text(
+                              "Title",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              width: SpacingUtils.widthSpacing(context, 0.105),
+                            ),
+                            Text(
+                              "Type",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              width: SpacingUtils.widthSpacing(context, 0.065),
+                            ),
+                            Text(
+                              "Volunteers",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
                       ),
                       Expanded(
                         child: ListView.builder(
                           itemCount: viewModel.activitiesParticipating.length,
                           itemBuilder: (context, index) {
-                            final activity = viewModel.activitiesParticipating[index];
+                            final activity =
+                                viewModel.activitiesParticipating[index];
                             return Padding(
-                              padding: const EdgeInsets.only(top: 5, left: 20, right: 20),
-                              child: UserCesDisplayWidget(activity: activity, user: widget.user,),
+                              padding: const EdgeInsets.only(
+                                top: 5,
+                                left: 20,
+                                right: 20,
+                              ),
+                              child: UserCesDisplayWidget(
+                                activity: activity,
+                                user: widget.user,
+                              ),
                             );
                           },
                         ),
@@ -136,32 +204,33 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
               ],
             ),
-            SizedBox(height: 35,),
+            SizedBox(height: 35),
             Row(
               children: [
                 ActionCard(
-                  width: SizeUtils.width(context, 0.3), 
-                  height: SizeUtils.height(context, 0.4),
+                  width: SizeUtils.width(context, 0.3),
+                  height: SizeUtils.height(context, 0.3),
                   borderRadiusVal: 30,
                   content: Stack(
                     children: [
                       Center(
                         child: ProgBarIndicWidg(
-                          progress: ((widget.user['ces_points'] / 60) * 100),
-                          width: SizeUtils.height(context, 0.37), 
-                          height: SizeUtils.height(context, 0.37)
+                          progress:
+                              (((widget.user.cesPoints).toDouble() / 60) * 100),
+                          width: SizeUtils.height(context, 0.27),
+                          height: SizeUtils.height(context, 0.27),
                         ),
                       ),
 
                       Center(
                         child: Text(
-                          "${(widget.user['ces_points']).round()}/60",
+                          "${(widget.user.cesPoints).round()}/60",
                           style: TextStyle(
                             fontSize: 30,
-                            fontWeight: FontWeight.bold
-                          )
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                   boxShadows: [
@@ -175,7 +244,6 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
               ],
             ),
-
           ],
         ),
       ),

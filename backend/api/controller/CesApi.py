@@ -194,6 +194,7 @@ class CesApi:
             "message": "CES Activity not found"
         }, status=status.HTTP_404_NOT_FOUND)
     
+<<<<<<< HEAD
     @staticmethod
     @api_view(['GET'])
     def get_calendar(request):
@@ -282,6 +283,22 @@ class CesApi:
                 'message': 'uid and ces_points are required'
             }, status=status.HTTP_400_BAD_REQUEST)
 
+=======
+
+    @staticmethod
+    @api_view(['POST'])
+    def edit_ces_points(request):
+        data = request.data
+        uid = data.get('uid')
+        ces_points = data.get('ces_points')
+
+        if not uid or ces_points is None:
+            return Response({
+                'status': False,
+                'message': 'uid and ces_points are required'
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+>>>>>>> 26c33ae967da678ee2d6c3173ebbec34da84fadb
         user_ref = db.collection("users")
         query = list(user_ref.where("uid", "==", uid).stream())
 
