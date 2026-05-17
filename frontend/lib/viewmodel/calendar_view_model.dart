@@ -1,27 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:frontend/model/activity.dart';
-import 'package:frontend/model/day_cell_data.dart';
 
 class CalendarViewModel extends ChangeNotifier {
-  //I just copied dashboard viewmodel
-
-  List<Activity> _activities = [];
+  Map<String, dynamic> _calendar = {};
   bool _isLoading = false;
   String? _error;
 
   DateTime _focusedMonth = DateTime(DateTime.now().year, DateTime.now().month);
 
-  /// The signed-in user's UID, set this after login resolves.
-  /// When null, all activities are shown (i have no idea how to connect this after login)
-  String? currentUserUid;
-  CalendarViewModel({this.currentUserUid});
-
-  //getters the view uses
-
   bool get isLoading => _isLoading;
   String? get error => _error;
+  DateTime get focusedMonth => _focusedMonth;
 
   String get monthLabel {
     const months = [
@@ -41,42 +31,42 @@ class CalendarViewModel extends ChangeNotifier {
     return months[_focusedMonth.month - 1];
   }
 
-  DateTime get focusedMonth => _focusedMonth;
-
-  //is just a mirror for the one in cesapi
-
-  void getActivities() async {
+  // activityIds is passed in on every call — never stored as a field —
+  // so DashboardViewModel can pass the updated list after join/leave.
+  Future<void> getActivities(List<dynamic> activityIds) async {
     _isLoading = true;
     _error = null;
     notifyListeners();
 
     try {
-      // Uses get_ces which returns the full activity objects we need for dates.
-      final url = 'http://127.0.0.1:8000/api/v1/get-ces/';
-      final response = await http.get(Uri.parse(url));
+      var uri = Uri.parse('http://127.0.0.1:8000/api/v1/get-calendar/');
+
+      if (activityIds.isNotEmpty) {
+        uri = uri.replace(
+          queryParameters: {
+            'activity_ids': activityIds.map((e) => e.toString()).join(','),
+          },
+        );
+      }
+
+      final response = await http.get(uri);
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> body = jsonDecode(response.body);
-
         if (body['status'] == true) {
-          final List<dynamic> raw = body['activites'] as List? ?? [];
-          _activities = raw
-              .map((e) => Activity.fromJson(e as Map<String, dynamic>))
-              .toList();
+          _calendar = (body['calendar'] as Map<String, dynamic>?) ?? {};
         }
       } else {
         _error = 'Server error: ${response.statusCode}';
       }
     } catch (e) {
       _error = 'Failed to load activities: $e';
-      print('CalendarViewModel error: $e');
+      debugPrint('CalendarViewModel error: $e');
     } finally {
       _isLoading = false;
       notifyListeners();
     }
   }
-
-  //the button thing needs this to go forward and back a month
 
   void goToPreviousMonth() {
     _focusedMonth = DateTime(_focusedMonth.year, _focusedMonth.month - 1);
@@ -88,12 +78,10 @@ class CalendarViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  //i dont really know how this works i had a lot of help with ai for this. these are helpers apparently, im gonna move them to another folder if i need to
-  /// All date cells to show for the focused month, padded to start on Sunday.
   List<DateTime> get calendarDays {
     final first = DateTime(_focusedMonth.year, _focusedMonth.month, 1);
     final last = DateTime(_focusedMonth.year, _focusedMonth.month + 1, 0);
-    final startPad = first.weekday % 7; // Sunday = 0
+    final startPad = first.weekday % 7;
     final endPad = 6 - (last.weekday % 7);
 
     return [
@@ -104,19 +92,11 @@ class CalendarViewModel extends ChangeNotifier {
     ];
   }
 
-  /// Resolves what the View renders for a single day cell.
-  DayCellData cellDataFor(DateTime date) {
-    final relevant = _activities
-        .where((a) {
-          // Volunteer filter — only show activities this user is signed up for.
-          if (currentUserUid != null && !a.hasVolunteer(currentUserUid!)) {
-            return false;
-          }
-          return a.isActiveOn(date);
-        })
-        .take(2)
-        .toList(); // max 2 per day (business rule)
-
-    return DayCellData(date: date, activities: relevant);
+  Map<String, dynamic>? cellDataFor(DateTime date) {
+    final key =
+        '${date.year.toString().padLeft(4, '0')}-'
+        '${date.month.toString().padLeft(2, '0')}-'
+        '${date.day.toString().padLeft(2, '0')}';
+    return _calendar[key];
   }
 }
