@@ -23,7 +23,6 @@ void main() {
         ChangeNotifierProvider(create: (_) => AdminActivityPageViewModel()),
         ChangeNotifierProvider(create: (_) => StudentSearchBarViewModel()),
 
-
         // add other viewmodels here
       ],
       child: const MyApp(),
