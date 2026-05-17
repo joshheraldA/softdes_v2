@@ -2,21 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:frontend/view/login_page.dart';
 import 'package:frontend/viewmodel/adminactivitypage_view_model.dart';
 import 'package:frontend/viewmodel/archive_view_model.dart';
-import 'package:frontend/viewmodel/ces_display_view_model.dart';
 import 'package:frontend/viewmodel/calendar_view_model.dart';
+import 'package:frontend/viewmodel/ces_display_view_model.dart';
 import 'package:frontend/viewmodel/create_activity_view_model.dart';
+import 'package:frontend/viewmodel/ces_display_view_model.dart';
 import 'package:frontend/viewmodel/dashboard_view_model.dart';
 import 'package:frontend/viewmodel/login_page_view_model.dart';
 import 'package:frontend/viewmodel/registration_view_model.dart';
 import 'package:frontend/viewmodel/student_searchbar_view_model.dart';
 import 'package:provider/provider.dart';
+import 'package:frontend/view/home_page.dart';
 
 void main() {
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => RegistrationViewModel()),
-        ChangeNotifierProvider(create: (_) => CalendarViewModel()),
         ChangeNotifierProvider(create: (_) => LoginPageViewModel()),
         ChangeNotifierProvider(create: (_) => DashboardViewModel()),
         ChangeNotifierProvider(create: (_) => CesDisplayViewModel()),
@@ -24,6 +25,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => CreateActivityViewModel()),
         ChangeNotifierProvider(create: (_) => AdminActivityPageViewModel()),
         ChangeNotifierProvider(create: (_) => StudentSearchBarViewModel()),
+        ChangeNotifierProvider(create: (_) => CalendarViewModel()),
         // add other viewmodels here
       ],
       child: const MyApp(),
