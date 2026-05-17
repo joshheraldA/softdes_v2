@@ -1,54 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:frontend/model/user.dart';
 import 'package:frontend/viewmodel/calendar_view_model.dart';
 import 'package:frontend/widgets/calendar_grid.dart';
 import 'package:frontend/widgets/month_header.dart';
+import 'package:provider/provider.dart';
 
 class CalendarPage extends StatefulWidget {
-  /// Pass the signed-in user's UID here (from your auth/login viewmodel).
-  /// Activities are filtered to only those where this UID is in `volunteers`.
-  final String? currentUserUid;
+  final User user;
 
-  const CalendarPage({super.key, this.currentUserUid});
+  const CalendarPage({super.key, required this.user});
 
   @override
-  State<CalendarPage> createState() => _ActivityCalendarPageState();
+  State<CalendarPage> createState() => _CalendarPageState();
 }
 
-class _ActivityCalendarPageState extends State<CalendarPage> {
-  late final CalendarViewModel _vm;
-
+class _CalendarPageState extends State<CalendarPage> {
   @override
   void initState() {
     super.initState();
-    _vm = CalendarViewModel(currentUserUid: widget.currentUserUid);
-    _vm.getActivities(); // same pattern as DashboardViewModel
-  }
-
-  @override
-  void dispose() {
-    _vm.dispose();
-    super.dispose();
+    context.read<CalendarViewModel>().getActivities(
+      widget.user.cesParticipating,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider.value(
-      value: _vm,
-      child: Scaffold(
-        backgroundColor: const Color(0xFFF0F3F7),
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: _CalendarCard(),
-          ),
+    return Scaffold(
+      backgroundColor: const Color(0xFFF0F3F7),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: _CalendarCard(),
         ),
       ),
     );
   }
 }
-
-// ---------------------------------------------------------------------------
 
 class _CalendarCard extends StatelessWidget {
   @override
@@ -72,47 +59,11 @@ class _CalendarCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Top bar
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // "Make Activity" button placeholder — wire your sheet here
-                GestureDetector(
-                  onTap: () {
-                    // TODO: show Make Activity sheet
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 8,
-                    ),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF1ABC9C),
-                      borderRadius: BorderRadius.circular(22),
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color(0xFF1ABC9C).withOpacity(0.32),
-                          blurRadius: 10,
-                          offset: const Offset(0, 4),
-                        ),
-                      ],
-                    ),
-                    child: const Text(
-                      'Make Activity',
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-                const MonthHeader(),
-              ],
+              children: [const MonthHeader()],
             ),
             const SizedBox(height: 10),
-
-            // Body
             if (vm.isLoading)
               const Expanded(child: Center(child: CircularProgressIndicator()))
             else if (vm.error != null)
