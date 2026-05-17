@@ -44,7 +44,8 @@ class UserApi:
                     "uid": user.uid,
                     "ces_points": 0,
                     "department": "Computer Engineering",
-                    "active_participating_ces_activities" : []
+                    "active_participating_ces_activities" : [],
+                    "role" : "student" #admin, moderator or student
                     })
                 user_doc = db.collection("users").document(user.uid).get()
 
@@ -132,6 +133,24 @@ class UserApi:
         
         return Response(users[0].to_dict(), status=status.HTTP_200_OK)
     
+    @staticmethod
+    @api_view(['GET'])
+    def get_all_users(request):
+        users = db.collection("users").get()
+
+        if not users:
+            return Response({
+                "status": False,
+                "error": "No users found."
+            }, status=status.HTTP_404_NOT_FOUND)
+
+        user_list = [user.to_dict() for user in users]
+
+        return Response({
+            "status": True,
+            "data": user_list
+        }, status=status.HTTP_200_OK)
+        
 
 
 
@@ -184,8 +203,6 @@ class UserApiMiddleware:
 
             
 
-
-            
                 
 
         

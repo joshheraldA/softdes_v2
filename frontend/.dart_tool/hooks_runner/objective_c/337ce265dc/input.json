@@ -4,9 +4,16 @@
     "build_asset_types": [],
     "linking_enabled": false
   },
+<<<<<<< HEAD
   "out_dir_shared": "C:\\Users\\Totep\\Documents\\JosAbellards\\CODE\\codingJourney\\DataCamp\\coding\\project\\softdes_v2\\frontend\\.dart_tool\\hooks_runner\\shared\\objective_c\\build\\",
   "out_file": "C:\\Users\\Totep\\Documents\\JosAbellards\\CODE\\codingJourney\\DataCamp\\coding\\project\\softdes_v2\\frontend\\.dart_tool\\hooks_runner\\objective_c\\337ce265dc\\output.json",
   "package_name": "objective_c",
   "package_root": "C:\\Users\\Totep\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\objective_c-9.3.0\\",
+=======
+  "out_dir_shared": "/Users/twsty/Documents/flutter/softdes_v2/frontend/.dart_tool/hooks_runner/shared/objective_c/build/",
+  "out_file": "/Users/twsty/Documents/flutter/softdes_v2/frontend/.dart_tool/hooks_runner/objective_c/337ce265dc/output.json",
+  "package_name": "objective_c",
+  "package_root": "/Users/twsty/.pub-cache/hosted/pub.dev/objective_c-9.3.0/",
+>>>>>>> af653d27afb786003f463505a103aeacaa86d114
   "user_defines": {}
 }
