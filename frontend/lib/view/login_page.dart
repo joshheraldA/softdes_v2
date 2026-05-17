@@ -88,7 +88,8 @@ class _LoginPageState extends State<LoginPage> {
                           labelText: "Email",
                           height: MediaQuery.of(context).size.height * 0.1,
                           width:
-                              MediaQuery.of(context).size.width * textFieldWidth,
+                              MediaQuery.of(context).size.width *
+                              textFieldWidth,
                           textController: emailController,
                         ),
                       ),
@@ -103,9 +104,9 @@ class _LoginPageState extends State<LoginPage> {
                       ),
 
                       Text(
-                        viewModel.text, 
+                        viewModel.text,
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.red)
+                        style: TextStyle(color: Colors.red),
                       ),
 
                       Divider(
@@ -126,10 +127,12 @@ class _LoginPageState extends State<LoginPage> {
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => ChangeNotifierProvider(
-                                      create: (_) => RegistrationViewModel(),
-                                      child: const RegistrationPage(),
-                                    ),
+                                    builder: (context) =>
+                                        ChangeNotifierProvider(
+                                          create: (_) =>
+                                              RegistrationViewModel(),
+                                          child: const RegistrationPage(),
+                                        ),
                                   ),
                                 );
                               },
@@ -171,12 +174,16 @@ class _LoginPageState extends State<LoginPage> {
                               emailController.text,
                               passwordController.text,
                             ),
-                            if(viewModel.loginStatus){
-                              Navigator.push(context, 
-                                MaterialPageRoute(builder: (context) => HomePage(user: viewModel.user))
-                              )
-                            }
-
+                            if (viewModel.loginStatus)
+                              {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        HomePage(user: viewModel.user),
+                                  ),
+                                ),
+                              },
                           },
                           width: MediaQuery.of(context).size.width * 0.25,
                           height: MediaQuery.of(context).size.height * 0.06,

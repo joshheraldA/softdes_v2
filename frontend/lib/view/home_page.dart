@@ -11,39 +11,28 @@ import 'package:provider/provider.dart';
 class HomePage extends StatefulWidget {
   final Map<String, dynamic> user;
 
-  const HomePage({
-    super.key,
-    required this.user
-  });
+  const HomePage({super.key, required this.user});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-<<<<<<< HEAD
-
-late List<Widget> _pages;
+  late List<Widget> _pages;
 
   @override
   void initState() {
     super.initState();
     // 2. Now you can safely access 'widget'
     _pages = [
-      DashboardPage(user: widget.user), // No 'const' here because widget.user is dynamic
+      DashboardPage(
+        user: widget.user,
+      ), // No 'const' here because widget.user is dynamic
       const CalendarPage(),
       const AccountPage(),
       const ArchivePage(),
     ];
   }
-=======
-  final List<Widget> _pages = [
-    const DashboardPage(),
-    const CalendarPage(),
-    const AccountPage(),
-    const ArchivePage(),
-  ];
->>>>>>> Calendarpage
 
   @override
   Widget build(BuildContext context) {
@@ -123,10 +112,6 @@ late List<Widget> _pages;
               ],
             ),
           ),
-<<<<<<< HEAD
-=======
-
->>>>>>> Calendarpage
           Expanded(
             child: Container(
               width: double.infinity,
