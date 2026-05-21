@@ -4,13 +4,13 @@ import 'dart:convert';
 
 class RegistrationViewModel extends ChangeNotifier {
   String _text = "";
-
   String get text => _text;
 
   Future<void> updateText(
     String username,
     String email,
     String password,
+    String course,       // ← new
   ) async {
     final url = Uri.parse("http://127.0.0.1:8000/api/v1/create-user/");
 
@@ -22,15 +22,14 @@ class RegistrationViewModel extends ChangeNotifier {
           "username": username,
           "email": email,
           "password": password,
+          "course": course,   // ← sent to backend
         }),
       );
 
       final Map<String, dynamic> data = jsonDecode(response.body);
-      if (data['status']) {
-        _text = "Success: ${data['message']}";
-      } else {
-        _text = "Failed: ${data['message']}";
-      }
+      _text = data['status']
+          ? "Success: ${data['message']}"
+          : "Failed: ${data['message']}";
     } catch (e) {
       _text = "Connection Failed: $e";
     }
