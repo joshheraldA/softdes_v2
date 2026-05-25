@@ -1,7 +1,11 @@
-<<<<<<< HEAD
-2026/05/17-11:54:03.160 3734 Reusing MANIFEST C:\Users\Totep\AppData\Local\Temp\flutter_tools.c5b2d256\flutter_tools_chrome_device.cf36ee91\Default\Site Characteristics Database/MANIFEST-000001
-=======
-2026/05/14-17:37:45.620 63200f Reusing MANIFEST /private/var/folders/vw/p6w17w0500z51ww_mm1_081r0000gn/T/flutter_tools.J7sAzq/flutter_tools_chrome_device.lIBgC5/Default/Site Characteristics Database/MANIFEST-000001
-2026/05/14-17:37:45.620 63200f Recovering log #3
-2026/05/14-17:37:45.620 63200f Reusing old log /private/var/folders/vw/p6w17w0500z51ww_mm1_081r0000gn/T/flutter_tools.J7sAzq/flutter_tools_chrome_device.lIBgC5/Default/Site Characteristics Database/000003.log 
->>>>>>> af653d27afb786003f463505a103aeacaa86d114
+2026/05/25-14:49:04.658 42fc Reusing MANIFEST C:\Users\Totep\AppData\Local\Temp\flutter_tools.1f46d27e\flutter_tools_chrome_device.86bf62ad\Default\Site Characteristics Database/MANIFEST-000001
+2026/05/25-14:49:04.661 42fc Recovering log #22
+2026/05/25-14:49:04.662 42fc Reusing old log C:\Users\Totep\AppData\Local\Temp\flutter_tools.1f46d27e\flutter_tools_chrome_device.86bf62ad\Default\Site Characteristics Database/000022.log 
+2026/05/25-14:49:04.662 42fc Delete type=0 #3
+2026/05/25-14:49:04.662 42fc Delete type=2 #6
+2026/05/25-14:49:04.662 42fc Delete type=2 #7
+2026/05/25-14:49:04.662 42fc Delete type=2 #8
+2026/05/25-14:49:04.662 42fc Delete type=0 #10
+2026/05/25-14:49:04.662 42fc Delete type=0 #15
+2026/05/25-14:49:04.662 42fc Delete type=2 #16
+2026/05/25-14:49:04.663 42fc Delete type=2 #23

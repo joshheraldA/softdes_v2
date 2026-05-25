@@ -1,27 +1,24 @@
 import 'package:flutter/material.dart';
 
-/// Maps the `type.type` string stored in Firestore (e.g. "Outreach")
-/// to a display color and icon.
-///
-/// Add new entries here as your activity types grow.
 class ActivityColors {
   ActivityColors._();
 
+  // Keys are lowercase — colorFor/iconFor both lowercase the input before lookup
   static const Map<String, Color> _colors = {
-    'Outreach': Color(0xFF27AE60), // green
-    'Donational': Color(0xFF1ABC9C), // teal
-    'Educational': Color(0xFF2980B9), // blue
+    'outreach': Color(0xFF27AE60), // green
+    'donational': Color(0xFF1ABC9C), // teal
+    'educational': Color(0xFF2980B9), // blue
     'type4': Color(0xFFE67E22), // orange
     'type5': Color(0xFF8E44AD), // purple
     'type6': Color(0xFFE74C3C), // red
   };
 
   static const Map<String, IconData> _icons = {
-    'Outreach': Icons.volunteer_activism_outlined,
-    'type2': Icons.park_outlined,
-    'Donational': Icons.local_hospital_outlined,
+    'outreach': Icons.volunteer_activism_outlined,
+    'donational': Icons.local_hospital_outlined,
+    'educational': Icons.school_outlined,
     'type4': Icons.inventory_2_outlined,
-    'Educational': Icons.school_outlined,
+    'type5': Icons.park_outlined,
     'type6': Icons.work_outline_rounded,
   };
 

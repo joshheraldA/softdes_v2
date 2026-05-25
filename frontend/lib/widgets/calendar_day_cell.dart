@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/model/activity_colors.dart';
-import 'package:frontend/model/day_cell_data.dart';
 import 'diagonal_split_cell.dart';
 
+// No longer imports DayCellData — the backend sends primary_type, secondary_type,
+// is_split, and activities directly in the map.
+
 class CalendarDayCell extends StatelessWidget {
-  final DayCellData data;
+  final DateTime date;
+  final Map<String, dynamic>? data; // null = empty day
   final bool inCurrentMonth;
   final bool isToday;
   final VoidCallback onTap;
 
   const CalendarDayCell({
     super.key,
+    required this.date,
     required this.data,
     required this.inCurrentMonth,
     required this.isToday,
@@ -38,13 +42,13 @@ class CalendarDayCell extends StatelessWidget {
   }
 
   Widget _buildBody() {
-    if (data.isEmpty) {
+    if (data == null) {
       return Container(
         color: inCurrentMonth ? Colors.transparent : Colors.grey.shade50,
         alignment: Alignment.topLeft,
         padding: const EdgeInsets.all(5),
         child: Text(
-          '${data.date.day}',
+          '${date.day}',
           style: TextStyle(
             fontSize: 11,
             fontWeight: FontWeight.w600,
@@ -56,30 +60,35 @@ class CalendarDayCell extends StatelessWidget {
       );
     }
 
-    final primaryColor = ActivityColors.colorFor(data.primaryType);
-    final secondaryColor = ActivityColors.colorFor(data.secondaryType);
+    // Read the pre-computed fields the backend already shaped for us
+    final primaryType = data!['primary_type'] as String?;
+    final secondaryType = data!['secondary_type'] as String?;
+    final isSplit = data!['is_split'] as bool? ?? false;
+    final activities = data!['activities'] as List<dynamic>? ?? [];
 
-    if (data.isSplit) {
+    final primaryColor = ActivityColors.colorFor(primaryType);
+    final secondaryColor = ActivityColors.colorFor(secondaryType);
+
+    if (isSplit) {
       return DiagonalSplitCell(
         primary: primaryColor,
         secondary: secondaryColor,
-        child: _FilledContent(data: data),
+        child: _FilledContent(date: date, activities: activities),
       );
     }
 
     return Container(
       color: primaryColor,
-      child: _FilledContent(data: data),
+      child: _FilledContent(date: date, activities: activities),
     );
   }
 }
 
-// ---------------------------------------------------------------------------
-
 class _FilledContent extends StatelessWidget {
-  final DayCellData data;
+  final DateTime date;
+  final List<dynamic> activities;
 
-  const _FilledContent({required this.data});
+  const _FilledContent({required this.date, required this.activities});
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +98,7 @@ class _FilledContent extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            '${data.date.day}',
+            '${date.day}',
             style: const TextStyle(
               fontSize: 10,
               fontWeight: FontWeight.w700,
@@ -97,34 +106,34 @@ class _FilledContent extends StatelessWidget {
             ),
           ),
           Row(
-            children: data.activities
-                .map(
-                  (a) => Padding(
-                    padding: const EdgeInsets.only(right: 2),
-                    child: Icon(
-                      ActivityColors.iconFor(a.type),
-                      color: Colors.white,
-                      size: 11,
-                    ),
-                  ),
-                )
-                .toList(),
+            children: activities.map((a) {
+              // type is stored as { "type": "Outreach", ... } in Firestore
+              final typeStr = (a['type'] is Map)
+                  ? (a['type'] as Map)['type'] as String?
+                  : a['type'] as String?;
+              return Padding(
+                padding: const EdgeInsets.only(right: 2),
+                child: Icon(
+                  ActivityColors.iconFor(typeStr),
+                  color: Colors.white,
+                  size: 11,
+                ),
+              );
+            }).toList(),
           ),
           const Spacer(),
-          Text(
-            data
-                .activities
-                .last
-                .title, //this only displays one title i will fix this soon
-            style: const TextStyle(
-              fontSize: 9,
-              fontWeight: FontWeight.w600,
-              color: Colors.white,
-              height: 1.2,
+          if (activities.isNotEmpty)
+            Text(
+              activities.last['title'] as String? ?? '',
+              style: const TextStyle(
+                fontSize: 9,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+                height: 1.2,
+              ),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
             ),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          ),
         ],
       ),
     );

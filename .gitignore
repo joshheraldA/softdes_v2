@@ -13,3 +13,4 @@ __pycache__/
 frontend/lib/firebase/google-services.json
 
 backend/api/firebase.py
+frontend/build/

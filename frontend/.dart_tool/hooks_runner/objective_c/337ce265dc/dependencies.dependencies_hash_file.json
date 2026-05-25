@@ -1,5 +1,1 @@
-<<<<<<< HEAD
 {"file_system":[],"environment":[{"key":"ANDROID_HOME","hash":1211310763124712267},{"key":"PATH","hash":8294239204018198383},{"key":"PROGRAMDATA","hash":-3479985355006727299},{"key":"SYSTEMDRIVE","hash":2892017696301558487},{"key":"SYSTEMROOT","hash":2713241238173206065},{"key":"TEMP","hash":-5044647414801611171},{"key":"TMP","hash":-5044647414801611171},{"key":"USERPROFILE","hash":-1580969504705663023},{"key":"WINDIR","hash":2713241238173206065}]}
-=======
-{"file_system":[],"environment":[{"key":"HOME","hash":-5825598058203356059},{"key":"TMPDIR","hash":-7396182991814465715},{"key":"PATH","hash":7770840667491286233}]}
->>>>>>> af653d27afb786003f463505a103aeacaa86d114

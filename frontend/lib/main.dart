@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/view/about_us_page.dart';
 import 'package:frontend/view/login_page.dart';
 import 'package:frontend/viewmodel/adminactivitypage_view_model.dart';
 import 'package:frontend/viewmodel/archive_view_model.dart';
+import 'package:frontend/viewmodel/calendar_view_model.dart';
 import 'package:frontend/viewmodel/ces_display_view_model.dart';
 import 'package:frontend/viewmodel/create_activity_view_model.dart';
 import 'package:frontend/viewmodel/dashboard_view_model.dart';
@@ -22,8 +24,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => CreateActivityViewModel()),
         ChangeNotifierProvider(create: (_) => AdminActivityPageViewModel()),
         ChangeNotifierProvider(create: (_) => StudentSearchBarViewModel()),
-
-        // add other viewmodels here
+        ChangeNotifierProvider(create: (_) => CalendarViewModel()),
       ],
       child: const MyApp(),
     ),
@@ -35,6 +36,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: LoginPage());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: AboutUsPage());
   }
 }

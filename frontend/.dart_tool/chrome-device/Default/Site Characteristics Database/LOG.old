@@ -1,11 +1,18 @@
-<<<<<<< HEAD
-2026/05/17-11:54:03.139 3734 Log #3: 2 ops saved to Table #4 OK
-2026/05/17-11:54:03.143 3734 Archiving C:\Users\Totep\AppData\Local\Temp\flutter_tools.c5b2d256\flutter_tools_chrome_device.cf36ee91\Default\Site Characteristics Database/000003.log: OK
-2026/05/17-11:54:03.143 3734 Table #4: 2 entries OK
-2026/05/17-11:54:03.148 3734 Archiving C:\Users\Totep\AppData\Local\Temp\flutter_tools.c5b2d256\flutter_tools_chrome_device.cf36ee91\Default\Site Characteristics Database/MANIFEST-000001: OK
-2026/05/17-11:54:03.156 3734 **** Repaired leveldb C:\Users\Totep\AppData\Local\Temp\flutter_tools.c5b2d256\flutter_tools_chrome_device.cf36ee91\Default\Site Characteristics Database; recovered 1 files; 194 bytes. Some data may have been lost. ****
-=======
-2026/05/14-15:55:57.598 610c0c Reusing MANIFEST /private/var/folders/vw/p6w17w0500z51ww_mm1_081r0000gn/T/flutter_tools.etCUQz/flutter_tools_chrome_device.MLO7la/Default/Site Characteristics Database/MANIFEST-000001
-2026/05/14-15:55:57.598 610c0c Recovering log #3
-2026/05/14-15:55:57.598 610c0c Reusing old log /private/var/folders/vw/p6w17w0500z51ww_mm1_081r0000gn/T/flutter_tools.etCUQz/flutter_tools_chrome_device.MLO7la/Default/Site Characteristics Database/000003.log 
->>>>>>> af653d27afb786003f463505a103aeacaa86d114
+2026/05/25-14:35:29.653 3b6c Reusing MANIFEST C:\Users\Totep\AppData\Local\Temp\flutter_tools.4b30993c\flutter_tools_chrome_device.d862ebd6\Default\Site Characteristics Database/MANIFEST-000001
+2026/05/25-14:35:29.657 3b6c Recovering log #3
+2026/05/25-14:35:29.657 3b6c Level-0 table #3: started
+2026/05/25-14:35:29.660 3b6c Level-0 table #3: 197 bytes OK
+2026/05/25-14:35:29.660 3b6c Recovering log #10
+2026/05/25-14:35:29.660 3b6c Level-0 table #4: started
+2026/05/25-14:35:29.662 3b6c Level-0 table #4: 168 bytes OK
+2026/05/25-14:35:29.662 3b6c Recovering log #15
+2026/05/25-14:35:29.662 3b6c Recovering log #22
+2026/05/25-14:35:29.663 3b6c Reusing old log C:\Users\Totep\AppData\Local\Temp\flutter_tools.4b30993c\flutter_tools_chrome_device.d862ebd6\Default\Site Characteristics Database/000022.log 
+2026/05/25-14:35:29.665 3b6c Delete type=0 #3
+2026/05/25-14:35:29.665 3b6c Delete type=2 #6
+2026/05/25-14:35:29.665 3b6c Delete type=2 #7
+2026/05/25-14:35:29.665 3b6c Delete type=2 #8
+2026/05/25-14:35:29.665 3b6c Delete type=0 #10
+2026/05/25-14:35:29.665 3b6c Delete type=0 #15
+2026/05/25-14:35:29.665 3b6c Delete type=2 #16
+2026/05/25-14:35:29.666 3b6c Delete type=2 #23

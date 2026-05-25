@@ -92,6 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                               MediaQuery.of(context).size.width *
                               textFieldWidth,
                           textController: emailController,
+                          obscure: false,
                         ),
                       ),
 
@@ -102,6 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                         width:
                             MediaQuery.of(context).size.width * textFieldWidth,
                         textController: passwordController,
+                        obscure: true,
                       ),
 
                       Text(

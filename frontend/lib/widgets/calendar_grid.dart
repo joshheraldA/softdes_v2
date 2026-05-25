@@ -17,7 +17,6 @@ class CalendarGrid extends StatelessWidget {
 
     return Column(
       children: [
-        // Weekday headers
         Row(
           children: _weekdays.map((label) {
             return Expanded(
@@ -38,30 +37,26 @@ class CalendarGrid extends StatelessWidget {
             );
           }).toList(),
         ),
-
-        // Day cells
         GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 7,
-            childAspectRatio:
-                2, // tweak this number up if cells are still too tall
+            childAspectRatio: 2,
           ),
           itemCount: days.length,
           itemBuilder: (context, i) {
             final date = days[i];
             final inMonth = date.month == vm.focusedMonth.month;
             final isToday = DateTime(date.year, date.month, date.day) == today;
-            final cellData = vm.cellDataFor(date);
+            final cellData = vm.cellDataFor(date); // Map<String,dynamic>?
 
             return CalendarDayCell(
+              date: date,
               data: cellData,
               inCurrentMonth: inMonth,
               isToday: isToday,
-              onTap: () {
-                // TODO: open activity detail sheet, pass cellData
-              },
+              onTap: () {},
             );
           },
         ),

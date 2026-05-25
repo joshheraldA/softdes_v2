@@ -66,7 +66,9 @@ class CesApi:
 
         for activity in activities:
             activity_data = activity.to_dict()
-            activity_list.append(activity_data)
+            if activity_data.get('approval_status') == "approved":               
+                activity_list.append(activity_data)
+
 
         return Response({
             'status': True,
@@ -193,6 +195,80 @@ class CesApi:
             "status": False,
             "message": "CES Activity not found"
         }, status=status.HTTP_404_NOT_FOUND)
+    
+    @staticmethod
+    @api_view(['GET'])
+    def get_calendar(request):
+        MONTH_MAP = {
+            'january': 1, 'february': 2, 'march': 3, 'april': 4,
+            'may': 5, 'june': 6, 'july': 7, 'august': 8,
+            'september': 9, 'october': 10, 'november': 11, 'december': 12,
+        }
+
+        # activity_ids: comma-separated Firestore doc IDs from the user's
+        # activeParticipatingCesActivities list. Replaces the volunteer_uid scan.
+        activity_ids_param = request.GET.get('activity_ids', '')
+        activity_ids = (
+            set(activity_ids_param.split(','))
+            if activity_ids_param.strip()
+            else None
+        )
+
+        activities = db.collection("CESArchive").get()
+
+        # Group activities by ISO date string, capped at 2 per day (business rule)
+        grouped = {}
+
+        for doc in activities:
+            data = doc.to_dict()
+
+            # Filter by the user's own activity list when provided
+            if activity_ids is not None and doc.id not in activity_ids:
+                continue
+
+            # Parse the stored month/day/year strings into an ISO date key
+            date_data  = data.get('date', {})
+            month_str  = date_data.get('month', '').strip().lower()
+            day_str    = date_data.get('day', '').strip()
+            year_str   = date_data.get('year', '').strip()
+
+            month_num = MONTH_MAP.get(month_str)
+            try:
+                day_num  = int(day_str)
+                year_num = int(year_str)
+            except (ValueError, TypeError):
+                continue  # skip activities with unparseable dates
+
+            if month_num is None:
+                continue
+
+            date_key = f"{year_num:04d}-{month_num:02d}-{day_num:02d}"
+
+            if date_key not in grouped:
+                grouped[date_key] = []
+
+            if len(grouped[date_key]) < 2:  # enforce max-2 business rule server-side
+                grouped[date_key].append(data)
+
+        # Shape each date bucket into a DayCellData-equivalent dict
+        calendar = {}
+        for date_key, acts in grouped.items():
+            type_0 = (acts[0].get('type') or {}).get('type', 'Default') if len(acts) > 0 else None
+            type_1 = (acts[1].get('type') or {}).get('type', 'Default') if len(acts) > 1 else None
+            is_split = len(acts) == 2 and type_0 != type_1
+
+            calendar[date_key] = {
+                "date":           date_key,
+                "primary_type":   type_0,
+                "secondary_type": type_1 if is_split else None,
+                "is_split":       is_split,
+                "activities":     acts,
+            }
+
+        return Response({
+            'status': True,
+            'calendar': calendar,
+        }, status=status.HTTP_200_OK)
     
 
     @staticmethod

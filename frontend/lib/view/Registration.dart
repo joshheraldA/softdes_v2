@@ -1,13 +1,11 @@
 import 'dart:ui';
 
-
-
 import 'package:flutter/material.dart';
+import 'package:frontend/view/course_selection_view.dart';
 import 'package:frontend/viewmodel/registration_view_model.dart';
 import 'package:frontend/widgets/action_card.dart';
 import 'package:frontend/widgets/rounded_button.dart';
 import 'package:frontend/widgets/rounded_text_field.dart';
-
 
 import 'package:provider/provider.dart';
 
@@ -101,6 +99,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               MediaQuery.of(context).size.width *
                               textFieldWidth,
                           textController: usernameController,
+                          obscure: false,
                         ),
                       ),
 
@@ -111,6 +110,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         width:
                             MediaQuery.of(context).size.width * textFieldWidth,
                         textController: emailController,
+                        obscure: false,
                       ),
 
                       RoundedTextField(
@@ -120,12 +120,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         width:
                             MediaQuery.of(context).size.width * textFieldWidth,
                         textController: passwordController,
+                        obscure: true,
                       ),
 
                       Text(
-                        viewModel.text, 
+                        viewModel.text,
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.red)
+                        style: TextStyle(color: Colors.red),
                       ),
 
                       Divider(
@@ -176,12 +177,27 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       Padding(
                         padding: const EdgeInsets.only(top: 20),
                         child: RoundedButton(
-                          onPressed: () => {
-                            viewModel.updateText(
-                              usernameController.text,
-                              emailController.text,
-                              passwordController.text,
-                            ),
+                          // Change this in Registration.dart — the Submit RoundedButton onPressed:
+                          onPressed: () {
+                            if (usernameController.text.isEmpty ||
+                                emailController.text.isEmpty ||
+                                passwordController.text.isEmpty)
+                              return;
+
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => ChangeNotifierProvider.value(
+                                  value:
+                                      viewModel, // ← passes the EXISTING viewModel, not a new one
+                                  child: CourseSelectionPage(
+                                    username: usernameController.text,
+                                    email: emailController.text,
+                                    password: passwordController.text,
+                                  ),
+                                ),
+                              ),
+                            );
                           },
                           width: MediaQuery.of(context).size.width * 0.25,
                           height: MediaQuery.of(context).size.height * 0.06,
