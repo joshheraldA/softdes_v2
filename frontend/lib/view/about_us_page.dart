@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/view/login_page.dart';
+import 'package:frontend/view/registration.dart';
+import 'package:frontend/viewmodel/login_page_view_model.dart';
 import 'package:frontend/widgets/rounded_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -308,10 +311,15 @@ class AboutUsPage extends StatelessWidget {
                           ),
                           SizedBox(height: 40),
                           RoundedButton(
-                            height: 210,
+                            height: 40,
                             width: 50,
                             backGroundColor: Color(0xFFe8c89a),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(context, 
+                                MaterialPageRoute(builder: (context) => LoginPage())
+                              );
+
+                            },                            
                             child: Text("Login"),
                           ),
                         ],
@@ -344,10 +352,15 @@ class AboutUsPage extends StatelessWidget {
                           ),
                           SizedBox(height: 50),
                           RoundedButton(
-                            height: 210,
+                            height: 40,
                             width: 50,
                             backGroundColor: Color(0xFFe8c89a),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(context, 
+                                MaterialPageRoute(builder: (context) => RegistrationPage())
+                              );
+
+                            },
                             child: Text("Register"),
                           ),
                         ],

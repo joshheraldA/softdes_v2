@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/view/about_us_page.dart';
 import 'package:frontend/view/login_page.dart';
 import 'package:frontend/viewmodel/adminactivitypage_view_model.dart';
 import 'package:frontend/viewmodel/archive_view_model.dart';
@@ -35,6 +36,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: LoginPage());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: AboutUsPage());
   }
 }
