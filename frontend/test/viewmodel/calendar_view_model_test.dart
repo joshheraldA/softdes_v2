@@ -66,9 +66,18 @@ void main() {
 
   group('monthLabel', () {
     final labelMap = {
-      1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr',
-      5: 'May', 6: 'Jun', 7: 'Jul', 8: 'Aug',
-      9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec',
+      1: 'Jan',
+      2: 'Feb',
+      3: 'Mar',
+      4: 'Apr',
+      5: 'May',
+      6: 'Jun',
+      7: 'Jul',
+      8: 'Aug',
+      9: 'Sep',
+      10: 'Oct',
+      11: 'Nov',
+      12: 'Dec',
     };
 
     test('returns the correct 3-letter abbreviation for every month', () {
@@ -101,6 +110,41 @@ void main() {
 
     test('last day in the grid is always a Saturday (weekday % 7 == 6)', () {
       expect(vm.calendarDays.last.weekday % 7, 6);
+    });
+
+    test('february 2024 contains 29 days (leap year)', () {
+      while (vm.focusedMonth.year > 2024 ||
+          (vm.focusedMonth.year == 2024 && vm.focusedMonth.month > 2)) {
+        vm.goToPreviousMonth();
+      }
+
+      while (vm.focusedMonth.year < 2024 ||
+          (vm.focusedMonth.year == 2024 && vm.focusedMonth.month < 2)) {
+        vm.goToNextMonth();
+      }
+
+      final febDays = vm.calendarDays.where(
+        (d) => d.month == 2 && d.year == 2024,
+      );
+
+      expect(febDays.length, 29);
+    });
+    test('february 2025 contains 28 days', () {
+      while (vm.focusedMonth.year > 2025 ||
+          (vm.focusedMonth.year == 2025 && vm.focusedMonth.month > 2)) {
+        vm.goToPreviousMonth();
+      }
+
+      while (vm.focusedMonth.year < 2025 ||
+          (vm.focusedMonth.year == 2025 && vm.focusedMonth.month < 2)) {
+        vm.goToNextMonth();
+      }
+
+      final febDays = vm.calendarDays.where(
+        (d) => d.month == 2 && d.year == 2025,
+      );
+
+      expect(febDays.length, 28);
     });
   });
 
