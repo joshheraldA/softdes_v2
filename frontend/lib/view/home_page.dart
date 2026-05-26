@@ -31,7 +31,6 @@ class _HomePageState extends State<HomePage> {
       DashboardPage(user: widget.user),
       CalendarPage(user: widget.user),
       AccountPage(user: widget.user),
-      // Pass user here — fixes the null crash in ArchivePage / CesArchiveWidget
       ArchivePage(user: widget.user),
       CreateActivityPage(user: widget.user),
       AdminActivityPage(),
@@ -97,17 +96,17 @@ class _HomePageState extends State<HomePage> {
                         pressed: () => viewModel.updatePage(3),
                       ),
                       MenuItemsWidget(
-                        icon: Icons.add_circle_outline,
+                        icon: Icons.create,
                         text: "Create Activity",
                         pressed: () => viewModel.updatePage(4),
                       ),
                       MenuItemsWidget(
-                        icon: Icons.add_circle_outline,
+                        icon: Icons.bookmark_add_rounded,
                         text: "Activity Approval",
                         pressed: () => viewModel.updatePage(5),
                       ),
                       MenuItemsWidget(
-                        icon: Icons.add_circle_outline,
+                        icon: Icons.info,
                         text: "Student Information",
                         pressed: () => viewModel.updatePage(6),
                       ),

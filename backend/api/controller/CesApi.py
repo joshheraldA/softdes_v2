@@ -66,7 +66,9 @@ class CesApi:
 
         for activity in activities:
             activity_data = activity.to_dict()
-            activity_list.append(activity_data)
+            if activity_data.get('approval_status') == "approved":               
+                activity_list.append(activity_data)
+
 
         return Response({
             'status': True,

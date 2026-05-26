@@ -13,4 +13,3 @@ class IdFactory:
             exp *= 10
         
         return result
-

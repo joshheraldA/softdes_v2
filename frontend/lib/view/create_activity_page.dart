@@ -32,8 +32,6 @@ class _CreateActivityPageState extends State<CreateActivityPage> {
     super.dispose();
   }
 
-  // ── Helpers ───────────────────────────────────────────────────────────────
-
   Widget _sectionLabel(String text) => Padding(
     padding: const EdgeInsets.only(bottom: 6, top: 14),
     child: Text(
@@ -152,8 +150,6 @@ class _CreateActivityPageState extends State<CreateActivityPage> {
     _yearController.clear();
   }
 
-  // ── Build ─────────────────────────────────────────────────────────────────
-
   @override
   Widget build(BuildContext context) {
     final vm = context.watch<CreateActivityViewModel>();
@@ -165,7 +161,6 @@ class _CreateActivityPageState extends State<CreateActivityPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ── Header ───────────────────────────────────────────────────────
             const Text(
               'Create CES Activity',
               style: TextStyle(
@@ -182,13 +177,11 @@ class _CreateActivityPageState extends State<CreateActivityPage> {
 
             const SizedBox(height: 24),
 
-            // ── Scrollable form body ─────────────────────────────────────────
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // ── Row 1: Title + Status ────────────────────────────────
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -204,6 +197,7 @@ class _CreateActivityPageState extends State<CreateActivityPage> {
                                 height: 55,
                                 width: double.infinity,
                                 textController: _titleController,
+                                obscure: false,
                               ),
                             ],
                           ),
@@ -223,7 +217,6 @@ class _CreateActivityPageState extends State<CreateActivityPage> {
                       ],
                     ),
 
-                    // ── Row 2: Department + Type ─────────────────────────────
                     const SizedBox(height: 8),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -239,6 +232,7 @@ class _CreateActivityPageState extends State<CreateActivityPage> {
                                 height: 55,
                                 width: double.infinity,
                                 textController: _departmentController,
+                                obscure: false,
                               ),
                             ],
                           ),
@@ -257,7 +251,6 @@ class _CreateActivityPageState extends State<CreateActivityPage> {
                       ],
                     ),
 
-                    // ── Beneficiaries ────────────────────────────────────────
                     _sectionLabel('BENEFICIARIES *'),
                     RoundedTextField(
                       hintText: 'e.g. Indigenous peoples of Barangay X',
@@ -265,13 +258,12 @@ class _CreateActivityPageState extends State<CreateActivityPage> {
                       height: 55,
                       width: double.infinity,
                       textController: _beneficiariesController,
+                      obscure: false,
                     ),
 
-                    // ── Date row ─────────────────────────────────────────────
                     _sectionLabel('DATE *'),
                     Row(
                       children: [
-                        // Month dropdown
                         Expanded(
                           flex: 3,
                           child: Container(
@@ -310,6 +302,7 @@ class _CreateActivityPageState extends State<CreateActivityPage> {
                             height: 55,
                             width: double.infinity,
                             textController: _dayController,
+                            obscure: false,
                           ),
                         ),
                         const SizedBox(width: 12),
@@ -322,12 +315,12 @@ class _CreateActivityPageState extends State<CreateActivityPage> {
                             height: 55,
                             width: double.infinity,
                             textController: _yearController,
+                            obscure: false,
                           ),
                         ),
                       ],
                     ),
 
-                    // ── Toggles ──────────────────────────────────────────────
                     _sectionLabel('ACTIVITY FLAGS'),
                     Wrap(
                       spacing: 10,
@@ -350,7 +343,6 @@ class _CreateActivityPageState extends State<CreateActivityPage> {
                       ],
                     ),
 
-                    // ── Submit button ────────────────────────────────────────
                     const SizedBox(height: 28),
                     SizedBox(
                       width: double.infinity,
